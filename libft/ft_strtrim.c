@@ -6,7 +6,7 @@
 /*   By: aguillot <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/22 09:43:04 by aguillot          #+#    #+#             */
-/*   Updated: 2017/12/04 14:38:06 by aguillot         ###   ########.fr       */
+/*   Updated: 2018/09/17 19:15:20 by aguillot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,11 @@ char	*ft_strtrim(char const *s)
 	len = ft_strlen(s);
 	i = 0;
 	j = 0;
-	while ((s[len - 1] == '\n' || s[len - 1] == '\t' || s[len - 1] == ' ') &&\
-			len > 0)
+	while ((s[len - 1] == '\n' || s[len - 1] == '\t' || s[len - 1] == ' ' ||\
+			s[len - 1] == '\r') && len > 0)
 		len--;
-	while ((s[i] == '\n' || s[i] == '\t' || s[i] == ' ') && len > 0)
+	while ((s[i] == '\n' || s[i] == '\t' || s[i] == ' ' || s[i] == '\r')\
+			&& len > 0)
 	{
 		i++;
 		len--;

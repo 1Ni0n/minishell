@@ -30,16 +30,39 @@ void	free_commands(char **commands)
 
 void	split_commands(t_input_list *input_list, char **line, t_minish *minish)
 {
-	char 	**commands;
-	int 	i;
+	char 		**commands;
+	int 		i;
+	int 		j;
+	char		*trimmed_command;
+	t_input_node	*inputzer;
 
 	commands = ft_strsplit(*line, ';');
 	i = 0;
+	j = 0;
 	while (commands[i])
 	{
-		if (append_to_input_list(input_list, commands[i]) == NULL)
+		trimmed_command = ft_strtrim(commands[i]);
+		if (append_to_input_list(input_list, trimmed_command) == NULL)
+		{
+			if (trimmed_command)
+				free(trimmed_command);
 			free_all_and_exit(minish, line, commands);
+		}
 		i++;
+		if (trimmed_command)
+			free(trimmed_command);
+	}
+	inputzer = input_list->head;
+	while (inputzer)
+	{
+		while(inputzer->words[j])
+		{
+			printf("%s\n", inputzer->words[j]);
+			j++;
+		}
+		j = 0;
+		printf("-----------------------------------------------------------------------------------------------------------\n");
+		inputzer = inputzer->next;
 	}
 	free_commands(commands);
 }

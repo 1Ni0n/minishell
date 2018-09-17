@@ -55,21 +55,18 @@ t_input_list	*append_to_input_list(t_input_list *input_list, char *command)
 {
 	t_input_node	*input_node;
 
-	if (input_list)
+	if (input_list && command[0] != '\0')
 	{
 		if (!(input_node = malloc(sizeof(t_input_node))))
 			return (NULL);
-		printf("1\n");
 		if ((input_node->words = ft_splitwhitespaces(command)) == NULL)
 			return (NULL);
-		printf("2\n");
 		input_node->word_count = count_em(input_node->words);
-		printf("3\n");
 		if (input_list->head == NULL)
 			input_list->head = input_node;
-		printf("4\n");
 		if (input_list->tail == NULL)
 			input_list->tail = input_node;
+
 		else
 		{
 			input_list->tail->next = input_node;
@@ -77,7 +74,6 @@ t_input_list	*append_to_input_list(t_input_list *input_list, char *command)
 			input_node->next = NULL;
 		}
 		input_list->length++;
-		printf("5\n");
 	}
 	return (input_list);
 }
@@ -88,5 +84,7 @@ t_input_list	*new_input_list(void)
 
 	if (!(input_list = malloc(sizeof(t_input_list))))
 		return (NULL);
+	input_list->head = NULL;
+	input_list->tail = NULL;
 	return (input_list);
 }
