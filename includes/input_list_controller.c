@@ -1,0 +1,92 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   input_list_controller.c                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: aguillot <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/09/14 14:57:05 by aguillot          #+#    #+#             */
+/*   Updated: 2018/09/14 14:57:07 by aguillot         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "../minishell.h"
+
+void		free_input_list(t_input_list *input_list)
+{
+	t_input_node	*input_node;
+	t_input_node	*tmp;
+	off_t			i;
+
+	i = 0;
+	input_node = input_list->head;
+	while (input_node)
+	{
+		if (input_node->words)
+		{
+			while (input_node->words[i])
+			{
+				free(input_node->words[i]);
+				i++;
+			}
+			free(input_node->words);
+		}
+		tmp = input_node;
+		input_node = input_node->next;
+		free(tmp);
+	}
+	free(input_list);
+}
+
+off_t			count_em(char **tab)
+{
+	off_t i;
+
+	i = 0;
+	if (tab)
+	{
+		while (tab[i])
+			i++;
+	}
+	return (0);
+}
+
+t_input_list	*append_to_input_list(t_input_list *input_list, char *command)
+{
+	t_input_node	*input_node;
+
+	if (input_list)
+	{
+		if (!(input_node = malloc(sizeof(t_input_node))))
+			return (NULL);
+		printf("1\n");
+		if ((input_node->words = ft_splitwhitespaces(command)) == NULL)
+			return (NULL);
+		printf("2\n");
+		input_node->word_count = count_em(input_node->words);
+		printf("3\n");
+		if (input_list->head == NULL)
+			input_list->head = input_node;
+		printf("4\n");
+		if (input_list->tail == NULL)
+			input_list->tail = input_node;
+		else
+		{
+			input_list->tail->next = input_node;
+			input_list->tail = input_node;
+			input_node->next = NULL;
+		}
+		input_list->length++;
+		printf("5\n");
+	}
+	return (input_list);
+}
+
+t_input_list	*new_input_list(void)
+{
+	t_input_list	*input_list;
+
+	if (!(input_list = malloc(sizeof(t_input_list))))
+		return (NULL);
+	return (input_list);
+}
