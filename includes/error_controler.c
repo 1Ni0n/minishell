@@ -12,6 +12,11 @@
 
 #include "../minishell.h"
 
+void		print_error_path()
+{
+	ft_putstr("ERROR: Environment variable PATH not found");
+}
+
 void		free_all_and_exit(t_minish *minish, char **line, char **commands)
 {
 	int	i;

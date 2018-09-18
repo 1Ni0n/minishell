@@ -24,9 +24,15 @@ void	start_loop(t_minish *minish)
 
 	while (1)
 	{
-		ft_putstr("@42-->");
+		ft_putstr("@42");
+		ft_putstr(RED);
+		ft_putstr("-->");
+		ft_putstr(RESET);
 		if (get_next_line(1, &line) == 1)
+		{
 			get_prompt(&line, minish);
+			commands_controller(minish);
+		}
 	}
 }
 

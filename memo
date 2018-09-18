@@ -1,1 +1,2 @@
-t'en est a get_prompt faut append to list le commands recues dans le mnishell
+Checker les leaks dans le prgm, a savoir tout ce qui est de la construction du path.
+Ensuite checker l'execution du prgrm.

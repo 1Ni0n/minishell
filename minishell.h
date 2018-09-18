@@ -12,6 +12,7 @@
 
 #ifndef MINISHELL_H
 # include "libft/libft.h"
+# include "libft/colors.h"
 # include "get_next_line.h"
 # include <stdio.h>
 # include <unistd.h>
@@ -61,4 +62,8 @@ void					get_prompt(char **line, t_minish *minish);
 void					free_all_and_exit(t_minish *minish, char **line, char **commands);
 t_input_list			*new_input_list(void);
 t_input_list			*append_to_input_list(t_input_list *input_list, char *command);
+void					commands_controller(t_minish *minish);
+char					**get_paths(t_env_list *env_list);
+char					**add_command_to_paths(t_input_node *input_node, char **paths);
+void					print_error_path();
 #endif

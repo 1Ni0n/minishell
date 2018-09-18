@@ -18,11 +18,11 @@ LIB = libft/libft.a
 
 INC_DIR = includes/
 
-INC_FILES = minishell.c get_next_line.c init_minishell.c parse_info.c env_list_controller.c error_controler.c get_prompt.c input_list_controller.c
+INC_FILES = minishell.c get_next_line.c init_minishell.c parse_info.c env_list_controller.c error_controler.c get_prompt.c input_list_controller.c commands_controller.c paths_controller.c
 
 INCLUDES = $(addprefix $(INC_DIR), $(INC_FILES))
 
-OBJ = minishell.o get_next_line.o init_minishell.o parse_info.o env_list_controller.o error_controler.o get_prompt.o input_list_controller.o
+OBJ = minishell.o get_next_line.o init_minishell.o parse_info.o env_list_controller.o error_controler.o get_prompt.o input_list_controller.o commands_controller.o paths_controller.o
 
 all: $(NAME)
 
