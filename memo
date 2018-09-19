@@ -1,2 +1,3 @@
 Checker les leaks dans le prgm, a savoir tout ce qui est de la construction du path.
-Ensuite checker l'execution du prgrm.
+Ensuite checker l'execution du prgrm. et gerer les erreurs si access ne marche pas.
+--> CP --> cd -

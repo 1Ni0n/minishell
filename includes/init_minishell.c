@@ -36,6 +36,18 @@ void	start_loop(t_minish *minish)
 	}
 }
 
+void	refresh_minish(t_minish *minish, char **paths)
+{
+	off_t	i;
+
+	i = 0;
+	while (paths[i])
+		free(paths[i++]);
+	free(paths);
+	free_input_list(minish->input_list);
+	start_loop(minish);
+}
+
 void	init_minishell(char **av, char **env)
 {
 	t_minish	*minish;

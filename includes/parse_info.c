@@ -12,6 +12,35 @@
 
 #include "../minishell.h"
 
+char	**get_env(t_env_list *env_list)
+{
+	t_env_node 	*env_node;
+	char		**env_tab;
+	off_t		len;
+
+	env_node = env_list->head;
+	len = 0;
+	while (env_node)
+	{
+		len++;
+		env_node = env_node->next;
+	}
+	env_node = env_list->head;
+	if ((env_tab = (char**)malloc(sizeof(char*) * (len + 1))) == NULL)
+		return (NULL);
+	env_tab[len] = NULL;
+	len = 0;
+	while (env_node)
+	{
+		env_tab[len] = ft_strdup(env_node->name);
+		env_tab[len] = ft_strlink(&env_tab[len], "=");
+		env_tab[len] = ft_strlink(&env_tab[len], env_node->content);
+		env_node = env_node->next;
+		len++;
+	}
+	return (env_tab);
+}
+
 void	free_tab(char **tab)
 {
 	int i;

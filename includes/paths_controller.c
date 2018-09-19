@@ -16,7 +16,6 @@ char	**add_command_to_paths(t_input_node *input_node, char **paths)
 {
 	char 	*command;
 	char 	**paths_and_command;
-	char	*tmp;
 	off_t 	i;
 
 	command = input_node->words[0];
@@ -30,9 +29,7 @@ char	**add_command_to_paths(t_input_node *input_node, char **paths)
 	while (paths[++i])
 	{
 		paths_and_command[i] = ft_strjoin(paths[i], "/");
-		tmp = paths_and_command[i];
-		paths_and_command[i] = ft_strjoin(paths_and_command[i], command);
-		free(tmp);		
+		paths_and_command[i] = ft_strlink(&paths_and_command[i], command);
 	}
 	return (paths_and_command);
 }
