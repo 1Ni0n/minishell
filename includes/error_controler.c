@@ -14,8 +14,15 @@
 
 void		print_error_path(char *command)
 {
+	ft_putstr("minishell: ");
 	ft_putstr(command);
-	ft_putstr(": command not found");
+	ft_putstr(": command not found\n");
+}
+
+void		free_lists_and_carry_on(t_minish *minish)
+{
+	free_env_list(minish->env_list);
+	free_input_list(minish->input_list);
 }
 
 void		free_all_and_exit(t_minish *minish, char **line, char **commands)
@@ -25,7 +32,8 @@ void		free_all_and_exit(t_minish *minish, char **line, char **commands)
 	i = 0;
 	free_env_list(minish->env_list);
 	free(minish);
-	free(*line);
+	if (line)
+		free(*line);
 	if (commands)
 	{
 		while (commands[i])

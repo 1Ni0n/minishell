@@ -6,7 +6,7 @@
 /*   By: aguillot <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/14 11:46:42 by aguillot          #+#    #+#             */
-/*   Updated: 2018/09/17 18:21:43 by aguillot         ###   ########.fr       */
+/*   Updated: 2018/09/20 15:48:16 by aguillot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,4 +79,5 @@ char	*ft_strlink(char **over, char *buff);
 int		ft_off_t_len(off_t n);
 int		ft_count_char(char *str, char c);
 char	**ft_splitwhitespaces(char *str);
+char	**ft_tabdup(char **tab);
 #endif

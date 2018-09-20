@@ -51,7 +51,7 @@ off_t			count_em(char **tab)
 	return (0);
 }
 
-t_input_list	*append_to_input_list(t_input_list *input_list, char *command)
+t_input_list	*append_to_input_list(t_input_list *input_list, char *command, off_t command_id)
 {
 	t_input_node	*input_node;
 
@@ -62,6 +62,7 @@ t_input_list	*append_to_input_list(t_input_list *input_list, char *command)
 		if ((input_node->words = ft_splitwhitespaces(command)) == NULL)
 			return (NULL);
 		input_node->word_count = count_em(input_node->words);
+		input_node->command_id = command_id;
 		if (input_list->head == NULL)
 			input_list->head = input_node;
 		if (input_list->tail == NULL)

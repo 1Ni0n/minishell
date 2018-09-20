@@ -26,10 +26,11 @@ char	**add_command_to_paths(t_input_node *input_node, char **paths)
 		return (NULL);
 	paths_and_command[i] = NULL;
 	i = 0;
-	while (paths[++i])
+	while (paths[i])
 	{
 		paths_and_command[i] = ft_strjoin(paths[i], "/");
 		paths_and_command[i] = ft_strlink(&paths_and_command[i], command);
+		i++;
 	}
 	return (paths_and_command);
 }

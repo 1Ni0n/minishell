@@ -13,15 +13,40 @@
 #include "../minishell.h"
 
 
-void	fourchette(t_minish *minish, char **paths_p_command)
+void	free_tabs(char **tab)
 {
-	char 	**env_tab;
-	pid_t	pid;
-	int 	i;
+	off_t i;
 
 	i = 0;
+	while (tab[i])
+	{
+		free(tab[i]);
+		i++;
+	}
+	free(tab);
+}
+
+void 	fourchette(t_minish *minish, char *paths_p_command, off_t command_id)
+{
+	char 	**env_tab;
+	char	**av_tab;
+	pid_t	pid;
+
 	env_tab = get_env(minish->env_list);
-	pid = fork;
+	av_tab = get_input_tab(minish->input_list, command_id);
+	if ((pid = fork()) == 0)
+	{
+		execve(paths_p_command, av_tab, env_tab);
+		free_tabs(env_tab);
+		free_tabs(av_tab);
+	}
+	else if (pid < 0)
+	{
+		ft_putstr("Error: Fork failed to create a new process.\n");
+		free_tabs(env_tab);
+		free_tabs(av_tab);
+	}
+	wait(&pid);
 }
 
 
@@ -32,23 +57,30 @@ void	commands_controller(t_minish *minish)
 	char			**paths;
 	char			**paths_p_command;
 
-	i = 0;
-	paths = get_paths(minish->env_list);
 	input_node = minish->input_list->head;
 	while (input_node)
 	{
+		i = 0;
+		paths = get_paths(minish->env_list);
 		if ((paths_p_command = add_command_to_paths(input_node, paths)) == NULL)
 		{
 			print_error_path(input_node->words[0]);
 			refresh_minish(minish, paths);
 		}
+		else
+		{
+			while(paths_p_command[i])
+			{
+				if (access(paths_p_command[i], X_OK) == 0 || access(paths_p_command[i], R_OK) == 0)
+					break;
+				i++;
+			}
+			if (paths_p_command[i])
+				fourchette(minish, paths_p_command[i], input_node->command_id);
+			else
+				print_error_path(input_node->words[0]);
+		}
 		input_node = input_node->next;
 	}
-	while(paths_p_command[++i])
-	{
-		if (access(paths_p_command[i], X_OK) == 0 || access(paths_p_command[i], R_OK))
-			break;
-		//if no access works, gotta print an error message according to the access error;
-	}
-	fourchette(minish, paths_p_command);
+	//free_lists_and_carry_on(minish);
 }

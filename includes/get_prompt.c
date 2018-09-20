@@ -12,22 +12,6 @@
 
 #include "../minishell.h"
 
-char	*erase_quotes(char *line)
-{
-	char 	*str;
-	off_t	i;
-
-	str = ft_strdup(line);
-	i = 0;
-	while (str[i])
-	{
-		if (str[i] != '\\' && (str[i + 1] == '"' || str[i + 1] == '\''))
-			str[i + 1] = ' ';
-		i++;
-	}
-	return (str);
-}
-
 void	free_commands(char **commands)
 {
 	off_t	i;
@@ -47,7 +31,7 @@ void	free_commands(char **commands)
 void	split_commands(t_input_list *input_list, char **line, t_minish *minish)
 {
 	char 		**commands;
-	int 		i;
+	off_t 		i;
 	char		*trimmed_command;
 
 	commands = ft_strsplit(*line, ';');
@@ -55,7 +39,7 @@ void	split_commands(t_input_list *input_list, char **line, t_minish *minish)
 	while (commands[i])
 	{
 		trimmed_command = ft_strtrim(commands[i]);
-		if (append_to_input_list(input_list, trimmed_command) == NULL)
+		if (append_to_input_list(input_list, trimmed_command, i) == NULL)
 		{
 			if (trimmed_command)
 				free(trimmed_command);
@@ -78,7 +62,8 @@ void	get_prompt(char **line, t_minish *minish)
 	tmp = *line;
 	*line = ft_strtrim(*line);
 	free(tmp);
-	clean_line = erase_quotes(*line);
+	if ((clean_line = handle_quotes(*line)) == NULL)
+		free_all_and_exit(minish, line, NULL);
 	if ((input_list = new_input_list()) == NULL)
 	{
 		free(clean_line);
