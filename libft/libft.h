@@ -80,4 +80,5 @@ int		ft_off_t_len(off_t n);
 int		ft_count_char(char *str, char c);
 char	**ft_splitwhitespaces(char *str);
 char	**ft_tabdup(char **tab);
+char	*ft_strlinktochar(char **str, char c);
 #endif
