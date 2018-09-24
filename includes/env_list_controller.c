@@ -44,6 +44,7 @@ void		append_to_env_list(t_env_list *env_list, char **tab)
 			env_malloc_error(env_list);
 		if ((env_node->content = ft_strdup(tab[1])) == 0)
 			env_malloc_error(env_list);
+		env_node->next = NULL;
 		if (env_list->head == NULL)
 			env_list->head = env_node;
 		if (env_list->tail == NULL)
@@ -52,7 +53,6 @@ void		append_to_env_list(t_env_list *env_list, char **tab)
 		{
 			env_list->tail->next = env_node;
 			env_list->tail = env_node;
-			env_node->next = NULL;
 		}
 		env_list->length++;
 	}

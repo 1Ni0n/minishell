@@ -18,19 +18,25 @@ void	free_minish(t_minish *minish)
 	free(minish);
 }
 
+void	print_prompt()
+{
+	ft_putstr("@42");
+	ft_putstr(RED);
+	ft_putstr("-->");
+	ft_putstr(RESET);
+}
+
 void	start_loop(t_minish *minish)
 {
 	char *line;
 
 	while (1)
 	{
-		ft_putstr("@42");
-		ft_putstr(RED);
-		ft_putstr("-->");
-		ft_putstr(RESET);
+		print_prompt();
 		if (get_next_line(1, &line) == 1)
 		{
 			get_prompt(&line, minish);
+			builtin_controller(minish);
 			commands_controller(minish);
 		}
 	}

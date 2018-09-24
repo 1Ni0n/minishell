@@ -74,4 +74,9 @@ void					refresh_minish(t_minish *minish, char **paths);
 char					**get_env(t_env_list *env_list);
 char					**get_av(t_input_list	*input_list);
 char					**get_input_tab(t_input_list *input_list, int command_id);
+void 					builtin_controller(t_minish *minish);
+void					echo_controller(char **words, t_minish *minish);
+int						setenv_controller(t_input_node *input_node, t_minish *minish);
+int						does_env_exists(char *env_name, t_env_list *env_list);
+int 					set_existing_env(char **command, t_minish *minish);
 #endif

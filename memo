@@ -1,3 +1,5 @@
 Checker les leaks dans le prgm, a savoir tout ce qui est de la construction du path.
 --> CP --> cd -
 Ne pas oublier de print le permission denied si access trouve mais ne marche pas.
+Ten est a setenv, theoriquement la commande marche, la surtester demain, il faut faire
+le cas ou lenv nexiste pas, et les free.

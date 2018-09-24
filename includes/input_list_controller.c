@@ -48,31 +48,35 @@ off_t			count_em(char **tab)
 		while (tab[i])
 			i++;
 	}
-	return (0);
+	return (i);
 }
 
 t_input_list	*append_to_input_list(t_input_list *input_list, char *command, off_t command_id)
 {
 	t_input_node	*input_node;
+	off_t			i;
 
+	i = 0;
 	if (input_list && command[0] != '\0')
 	{
 		if (!(input_node = malloc(sizeof(t_input_node))))
 			return (NULL);
+		input_node->words = NULL;
 		if ((input_node->words = ft_splitwhitespaces(command)) == NULL)
 			return (NULL);
+		while (input_node->words[i])
+			i++;
 		input_node->word_count = count_em(input_node->words);
 		input_node->command_id = command_id;
+		input_node->next = NULL;
 		if (input_list->head == NULL)
 			input_list->head = input_node;
 		if (input_list->tail == NULL)
 			input_list->tail = input_node;
-
 		else
 		{
 			input_list->tail->next = input_node;
 			input_list->tail = input_node;
-			input_node->next = NULL;
 		}
 		input_list->length++;
 	}
