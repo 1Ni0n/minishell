@@ -22,21 +22,6 @@ void	free_command(char **command)
 	free(command);
 }
 
-void	print_env(t_env_list *env_list)
-{
-	t_env_node *env_node;
-
-	env_node = env_list->head;
-	while (env_node)
-	{
-		ft_putstr(env_node->name);
-		write(1, "=", 1);
-		ft_putstr(env_node->content);
-		write(1, "\n", 1);
-		env_node = env_node->next;
-	}
-}
-
 int		set_the_env(t_input_node *input_node, t_minish *minish)
 {
 	char 	**new_env;
@@ -47,9 +32,14 @@ int		set_the_env(t_input_node *input_node, t_minish *minish)
 	new_env = NULL;
 	command = input_node->words;
 	if (does_env_exists(command[1], minish->env_list) == 1)
-		return (set_existing_env(command, minish));
+	{
+		i = set_existing_env(command, minish);
+		free_command(command);
+		return (i);
+	}
+	i = set_new_env(command, minish);
 	free_command(command);
-	return (1);
+	return (i);
 }
 
 int 	check_if_alphanum(char *str)
@@ -68,8 +58,7 @@ int 	check_if_alphanum(char *str)
 		if (!((str[i] >= 42 && str[i] <= 57) || (str[i] >= 65 &&\
 			str[i] <= 90) || (str[i] >= 97 && str[i] <= 122)))
 		{
-			ft_putstr("setenv: Variable name must contain\
-				alphanumeric characters.\n");
+			ft_putstr("setenv: Variable name must contain alphanumeric characters.\n");
 			return (-1);
 		}
 		i++;
@@ -84,15 +73,16 @@ int		setenv_controller(t_input_node *input_node, t_minish *minish)
 	command = input_node->words;
 	if (input_node->word_count >= 4)
 	{
-		ft_putstr("setenv: Too many arguments.");
+		ft_putstr("setenv: Too many arguments.\n");
 		return (0);
 	}
 	else if (input_node->word_count == 1)
 		print_env(minish->env_list);
 	else
 	{
-		if (check_if_alphanum(input_node->words[0]) == 1)
-			return (set_the_env(input_node, minish));
+		if (check_if_alphanum(input_node->words[1]) == 1)
+			if (set_the_env(input_node, minish) == -1)
+				free_minish_and_exit(minish);
 	}
 	return (1);
 }

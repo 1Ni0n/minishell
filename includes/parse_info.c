@@ -80,7 +80,29 @@ void 	parse_env(char **env, t_minish *minish)
 	minish->env_list = env_list;
 }
 
+void	add_shell_lvl(t_minish *minish)
+{
+	t_env_node 	*env_node;
+	int			i;
+
+	env_node = minish->env_list->head;
+	while (env_node)
+	{
+		if (ft_strcmp(env_node->name, "SHLVL") == 0)
+			break;
+		env_node = env_node->next;
+	}
+	if (env_node)
+	{
+		i = ft_atoi(env_node->content);
+		i++;
+		ft_strdel(&env_node->content);
+		env_node->content = ft_itoa(i);
+	}
+}
+
 void	parse_info(char **env, t_minish *minish)
 {
 	parse_env(env, minish);
+	add_shell_lvl(minish);
 }

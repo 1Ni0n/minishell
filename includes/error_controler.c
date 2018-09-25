@@ -52,3 +52,11 @@ void		env_malloc_error(t_env_list *env_list)
 	ft_putstr("Malloc failed. Out of Memory. Exiting program...\n");
 	exit(1);
 }
+
+void	free_minish_and_exit(t_minish *minish)
+{
+	free_env_list(minish->env_list);
+	free_input_list(minish->input_list);
+	free(minish);
+	exit(1);
+}

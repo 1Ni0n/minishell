@@ -50,3 +50,20 @@ int	set_existing_env(char **command, t_minish *minish)
 	}
 	return (1);
 }
+
+int set_new_env(char **command, t_minish *minish)
+{
+	char **tab;
+
+	if (!(tab = (char**)malloc(sizeof(char*) * (3))))
+		return (-1);
+	if (!(tab[0] = ft_strdup(command[1])))
+		return (-1);
+	if (!(tab[1] = ft_strdup(command[2])))
+		return (-1);
+	append_to_env_list(minish->env_list, tab);
+	free(tab[0]);
+	free(tab[1]);
+	free(tab);
+	return (1);
+}

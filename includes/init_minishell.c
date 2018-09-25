@@ -39,6 +39,8 @@ void	start_loop(t_minish *minish)
 			builtin_controller(minish);
 			commands_controller(minish);
 		}
+		else
+			write(1, "\n", 1);
 	}
 }
 
