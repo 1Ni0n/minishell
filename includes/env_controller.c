@@ -12,55 +12,88 @@
 
 #include "../minishell.h"
 
-int 	do_we_print(char **words, int i, t_minish *minish)
+int 	do_we_print(char **words, int i, t_env_list *env_list)
 {
 	if (ft_strcmp(words[i], "env") == 0)
 	{
 	 	if (!words[i + 1])
 	 	{
-			print_env(minish->env_list);
+			print_env(env_list);
 			return (1);
 	 	}
 		else if (words[i + 1])
+		{
 			if (ft_strcmp(words[i + 1], "--") == 0 && !words[i + 2])
 			{
-				print_env(minish->env_list);
+				print_env(env_list);
 				return (1);
 			}
+		}
 	}
 	return (-1);
 }
 
-void	env_controller(t_input_node *input_node, t_minish *minish, int i)
+int 	manage_opts(char **words, int *i)
 {
-	int 		opt;
-	t_env_list	*tmp_env_list;
+	int j;
+	int opt;
 
 	opt = 0;
-	tmp_env_list = new_env_list();
-	if (do_we_print(input_node->words, i, minish) == 1)
-		return ();
+	if (ft_strcmp(words[*i - 1], "env") == 0)
+	{
+		while (words[*i] && words[*i][0] == '-' && ft_strcmp(words[*i], "--") != 0)
+		{
+			j = 1;
+			while (words[*i][j])
+			{
+				if (words[*i][j] != 'i')
+				{
+					print_env_usage(words[*i][j]);
+					return (-1);
+				}
+				else
+					opt = 1;
+				j++;
+			}
+			(*i)++;
+		}
+	}
+	return (opt);
+}
+
+void	env_recursive(t_input_node *input_node, t_minish *minish, int i, t_env_list *tmp_env_list)
+{
+	char		**words;
+	int 		opt;
+
+	words = input_node->words;
+	if (do_we_print(input_node->words, i, tmp_env_list) == 1)
+		return ;
 	i++;
 	while (words[i] && ft_strcmp(words[i], "env") != 0)
 	{
-		if (ft_strcmp(words[i - 1], "env") == 0 && words[i][0] == '-')
+		if ((opt = manage_opts(words, &i)) == -1)
 		{
-			if (words[i][1] != 'i')
-			{
-				print_usage();
-				return ();
-			}
-			else
-				opt = 1;
-			if (ft_strcmp(words[i + 2], "--"))
-				i++;
+			free_env_list(tmp_env_list);
+			return ;
 		}
-		if (opt = 1)
+		if (opt == 1)
 		{
-			tmp_env_list = free_env_list(tmp_env_list);
+			free_env_list(tmp_env_list);
 			tmp_env_list = new_env_list();
 		}
-				
-		i++;
+		route_to_command(tmp_env_list, words, &i);
+		if (words[i])
+			i++;
 	}
+	if (words[i])
+		env_recursive(input_node, minish, i, tmp_env_list);
+}
+
+void	env_controller(t_input_node *input_node, t_minish *minish, int i)
+{
+	t_env_list	*tmp_env_list;
+	
+	tmp_env_list = dup_env_list(minish->env_list->head);
+	env_recursive(input_node, minish, i, tmp_env_list);
 }

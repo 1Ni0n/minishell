@@ -33,3 +33,27 @@ char	**get_input_tab(t_input_list *input_list, int command_id)
 	av_tab = build_av_tab(input_node);
 	return (av_tab);
 }
+
+char	**get_input_n_tab(char **words, int i)
+{
+	int 	b;
+	char	**av;
+
+	b = i;
+	while (words[i])
+	{
+		i++;
+	}
+	if (!(av = (char**)malloc(sizeof(char*) * (b - i + 1))))
+		exit (1);
+	i = b;
+	b = 0;
+	while (words[i])
+	{
+		av[b] = ft_strdup(words[i]);
+		i++;
+		b++;
+	}
+	av[b] = NULL;
+	return (av);
+}

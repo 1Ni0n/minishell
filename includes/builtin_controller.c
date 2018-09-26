@@ -24,8 +24,7 @@ void	check_wich_command(t_input_node *input_node, t_minish *minish)
 	else if (ft_strcmp(command, "env") == 0)
 		env_controller(input_node, minish, 0);
 	/*else if (ft_strcmp(command, "cd") == 0)
-		cd_controller(input_node, minish);*/
-	/*
+		cd_controller(input_node, minish);
 	else if (ft_strcmp(command, "unsetenv") == 0)
 		unsetenv_controller(input_node, minish);
 	else if (ft_strcmp(command, "cd") == 0)

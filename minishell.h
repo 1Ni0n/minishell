@@ -69,8 +69,9 @@ t_input_list			*append_to_input_list(t_input_list *input_list, char *command, of
 void					free_input_list(t_input_list *input_list);
 void					commands_controller(t_minish *minish);
 char					**get_paths(t_env_list *env_list);
-char					**add_command_to_paths(t_input_node *input_node, char **paths);
+char					**add_command_to_paths(char *command, char **paths);
 void					print_error_path(char *command);
+void					print_env_usage(char c);
 void					refresh_minish(t_minish *minish, char **paths);
 char					**get_env(t_env_list *env_list);
 char					**get_av(t_input_list	*input_list);
@@ -84,4 +85,12 @@ int 					set_existing_env(char **command, t_minish *minish);
 int 					set_new_env(char **command, t_minish *minish);
 void					env_controller(t_input_node *input_node, t_minish *minish, int i);
 void					cd_controller(t_input_node *input_node, t_minish *minish);
+void					print_env_usage(char c);
+t_env_list 				*dup_env_list(t_env_node *head);
+void					print_env(t_env_list *env_list);
+void					route_to_command(t_env_list *tmp_env_list, char **words, int *i);
+char					**get_input_n_tab(char **words, int i);
+void					free_tabs(char **tab);
+t_env_node				*env_exists(t_env_list *env_list, char *tab);
+void					replace_env(t_env_node *env_node, char *tab);
 #endif

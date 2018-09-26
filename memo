@@ -1,6 +1,7 @@
-Checker les leaks dans le prgm, a savoir tout ce qui est de la construction du path.
+lhecker les leaks dans le prgm, a savoir tout ce qui est de la construction du path.
 --> CP --> cd -
 Ne pas oublier de print le permission denied si access trouve mais ne marche pas.
 Ten est a setenv, theoriquement la commande marche, la surtester demain, il faut faire
 le cas ou lenv nexiste pas, et les free.
 Un truc pas tout a fait propre cest dans le env_controller quand tu new_env_list ca va pas tout free si malloc foire ca exit direct.
+test de unset env et apres de lancer une commande.

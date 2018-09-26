@@ -70,3 +70,33 @@ t_env_list	*new_env_list(void)
 	env_list->tail = NULL;
 	return (env_list);
 }
+
+t_env_list 	*dup_env_list(t_env_node *head)
+{
+	t_env_list 	*tmp_env_list;
+	t_env_node	*env_node;
+
+	tmp_env_list = new_env_list();
+	while (head)
+	{
+		if ((env_node = malloc(sizeof(*env_node))) == NULL)
+			env_malloc_error(tmp_env_list);
+		if ((env_node->name = ft_strdup(head->name)) == 0)
+			env_malloc_error(tmp_env_list);
+		if ((env_node->content = ft_strdup(head->content)) == 0)
+			env_malloc_error(tmp_env_list);
+		env_node->next = NULL;
+		if (tmp_env_list->head == NULL)
+			tmp_env_list->head = env_node;
+		if (tmp_env_list->tail == NULL)
+			tmp_env_list->tail = env_node;
+		else
+		{
+			tmp_env_list->tail->next = env_node;
+			tmp_env_list->tail = env_node;
+		}
+		tmp_env_list->length++;
+		head = head->next;
+	}
+	return (tmp_env_list);
+}
