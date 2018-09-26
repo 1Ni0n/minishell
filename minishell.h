@@ -88,7 +88,7 @@ void					cd_controller(t_input_node *input_node, t_minish *minish);
 void					print_env_usage(char c);
 t_env_list 				*dup_env_list(t_env_node *head);
 void					print_env(t_env_list *env_list);
-void					route_to_command(t_env_list *tmp_env_list, char **words, int *i);
+int 					route_to_command(t_env_list *tmp_env_list, char **words, int *i);
 char					**get_input_n_tab(char **words, int i);
 void					free_tabs(char **tab);
 t_env_node				*env_exists(t_env_list *env_list, char *tab);

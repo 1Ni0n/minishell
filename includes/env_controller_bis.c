@@ -64,7 +64,7 @@ void 	fourchette_bis(char *path, t_env_list *tmp_env_list, char **words, int i)
 	wait(&pid);
 }
 
-void	execute_command(t_env_list *tmp_env_list, char **words, int i)
+int 	execute_command(t_env_list *tmp_env_list, char **words, int i)
 {
 	char 	**paths;
 	char 	**paths_p_command;
@@ -75,8 +75,11 @@ void	execute_command(t_env_list *tmp_env_list, char **words, int i)
 	a = 0;
 	paths = get_paths(tmp_env_list);
 	paths_p_command = NULL;
-	if (access(words[i], X_OK) == 0 || access(words[i], R_OK) == 0 || paths == NULL)
-		fourchette_bis(NULL, tmp_env_list, words, i);
+	if (access(words[i], X_OK) == 0 || access(words[i], R_OK) == 0)
+	{
+		fourchette_bis(words[i], tmp_env_list, words, i);
+		return (1);
+	}
 	else
 	{
 		paths_p_command = add_command_to_paths(words[i], paths);
@@ -87,30 +90,44 @@ void	execute_command(t_env_list *tmp_env_list, char **words, int i)
 			b++;
 		}
 		if (paths_p_command[b])
+		{
 			fourchette_bis(paths_p_command[b], tmp_env_list, words, i);
+			return (1);
+		}
 		else
+		{
 			print_error_path(words[i]);
+			return (0);
+		}
 	}
 }
 
-void	route_to_command(t_env_list *tmp_env_list, char **words, int *i)
+int 	route_to_command(t_env_list *tmp_env_list, char **words, int *i)
 {
 	int j;
+	int set;
 
 	j = 0;
+	set = 0;
 	if (words[*i])
 	{
 		while (words[*i][j])
 		{
 			if (words[*i][j] == '=')
 			{
+				set = 1;
 				set_tmp_variable(tmp_env_list, words[*i]);
 				if (!words[*i + 1])
+				{
 					print_env(tmp_env_list);
-				return ;
+					return (1);
+				}
 			}
 			j++;
 		}
-		execute_command(tmp_env_list, words, *i);
+		if (set == 0)
+			if (execute_command(tmp_env_list, words, *i) == 1)
+				return (1);
 	}
+	return (0);
 }

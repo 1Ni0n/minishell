@@ -44,7 +44,7 @@ char	**get_input_n_tab(char **words, int i)
 	{
 		i++;
 	}
-	if (!(av = (char**)malloc(sizeof(char*) * (b - i + 1))))
+	if (!(av = (char**)malloc(sizeof(char*) * (i - b + 1))))
 		exit (1);
 	i = b;
 	b = 0;

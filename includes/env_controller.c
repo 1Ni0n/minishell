@@ -82,7 +82,8 @@ void	env_recursive(t_input_node *input_node, t_minish *minish, int i, t_env_list
 			free_env_list(tmp_env_list);
 			tmp_env_list = new_env_list();
 		}
-		route_to_command(tmp_env_list, words, &i);
+		if (route_to_command(tmp_env_list, words, &i) == 1)
+			return ;
 		if (words[i])
 			i++;
 	}
