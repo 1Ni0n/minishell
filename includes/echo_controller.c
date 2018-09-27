@@ -21,30 +21,27 @@ void	daaamn(off_t i, char **words)
 		j = 0;
 		while (words[i][j])
 		{
-			if (words[i][j] == '\\')
-			{
-				j++;
-				write(1, &words[i][j], 1);
-				j++;
-			}
-			else if (words[i][j] == '\'' || words[i][j] == '"')
-				j++;
-			else
-				write(1, &words[i][j], 1);
+			write(1, &words[i][j], 1);
+			j++;
 		}
 		i++;
 	}
 }
 
-void	echo_controller(char **words, t_minish *minish)
+void	echo_controller(char **words)
 {
 	off_t 	i;
 
-	(void)minish;
 	i = 1;
-	if (ft_strcmp(words[1], "-n") == 0)
-		i++;
+	if (words[1])
+		if (ft_strcmp(words[1], "-n") == 0)
+			i++;
 	daaamn(i, words);
-	if (ft_strcmp(words[1], "-n") != 0)
+	if (words[1])
+	{
+		if (ft_strcmp(words[1], "-n") != 0)
+			write(1, "\n", 1);
+	}
+	else
 		write(1, "\n", 1);
 }

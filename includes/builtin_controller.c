@@ -18,16 +18,16 @@ void	check_wich_command(t_input_node *input_node, t_minish *minish)
 
 	command = input_node->words[0];
 	if (ft_strcmp(command, "echo") == 0)
-		echo_controller(input_node->words, minish);
+		echo_controller(input_node->words);
 	else if (ft_strcmp(command, "setenv") == 0)
 		setenv_controller(input_node, minish);
 	else if (ft_strcmp(command, "env") == 0)
 		env_controller(input_node, minish, 0);
-	/*else if (ft_strcmp(command, "cd") == 0)
-		cd_controller(input_node, minish);
+	else if (ft_strcmp(command, "exit") == 0)
+		exit_controller(input_node, minish);
 	else if (ft_strcmp(command, "unsetenv") == 0)
 		unsetenv_controller(input_node, minish);
-	else if (ft_strcmp(command, "cd") == 0)
+	/*else if (ft_strcmp(command, "cd") == 0)
 		cd_controller(input_node, minish);
 	else if (ft_strcmp(command, "exit") == 0)
 		exit_controller(input_node, minish);*/

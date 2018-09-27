@@ -81,7 +81,7 @@ void	commands_controller(t_minish *minish)
 				if ((paths_p_command = add_command_to_paths(input_node->words[0], paths)) == NULL)
 				{
 					print_error_path(input_node->words[0]);
-					refresh_minish(minish, paths);
+					//refresh_minish(minish, paths);
 				}
 				else
 				{

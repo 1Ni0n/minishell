@@ -22,26 +22,6 @@ void	free_command(char **command)
 	free(command);
 }
 
-int		set_the_env(t_input_node *input_node, t_minish *minish)
-{
-	char 	**new_env;
-	char	**command;
-	int 	i;
-
-	i = 0;
-	new_env = NULL;
-	command = input_node->words;
-	if (does_env_exists(command[1], minish->env_list) == 1)
-	{
-		i = set_existing_env(command, minish);
-		free_command(command);
-		return (i);
-	}
-	i = set_new_env(command, minish);
-	free_command(command);
-	return (i);
-}
-
 int 	check_if_alphanum(char *str)
 {
 	off_t	i;
@@ -64,6 +44,24 @@ int 	check_if_alphanum(char *str)
 		i++;
 	}
 	return (1);
+}
+
+int		set_the_env(t_input_node *input_node, t_minish *minish)
+{
+	char 	**new_env;
+	char	**command;
+	int 	i;
+
+	i = 0;
+	new_env = NULL;
+	command = input_node->words;
+	if (does_env_exists(command[1], minish->env_list) == 1)
+	{
+		i = set_existing_env(command, minish);
+		return (i);
+	}
+	i = set_new_env(command, minish);
+	return (i);
 }
 
 int		setenv_controller(t_input_node *input_node, t_minish *minish)

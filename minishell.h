@@ -77,7 +77,7 @@ char					**get_env(t_env_list *env_list);
 char					**get_av(t_input_list	*input_list);
 char					**get_input_tab(t_input_list *input_list, int command_id);
 void 					builtin_controller(t_minish *minish);
-void					echo_controller(char **words, t_minish *minish);
+void					echo_controller(char **words);
 void					print_env(t_env_list *env_list);
 int						setenv_controller(t_input_node *input_node, t_minish *minish);
 int						does_env_exists(char *env_name, t_env_list *env_list);
@@ -93,4 +93,7 @@ char					**get_input_n_tab(char **words, int i);
 void					free_tabs(char **tab);
 t_env_node				*env_exists(t_env_list *env_list, char *tab);
 void					replace_env(t_env_node *env_node, char *tab);
+void					exit_controller(t_input_node *input_node, t_minish *minish);
+void					free_minish(t_minish *minish);
+void					unsetenv_controller(t_input_node *input_node, t_minish *minish);
 #endif

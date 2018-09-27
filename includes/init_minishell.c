@@ -14,7 +14,10 @@
 
 void	free_minish(t_minish *minish)
 {
-	free_env_list(minish->env_list);
+	if (minish->env_list)
+		free_env_list(minish->env_list);
+	if  (minish->input_list)
+		free_input_list(minish->input_list);
 	free(minish);
 }
 

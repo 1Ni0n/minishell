@@ -5,3 +5,5 @@ Ten est a setenv, theoriquement la commande marche, la surtester demain, il faut
 le cas ou lenv nexiste pas, et les free.
 Un truc pas tout a fait propre cest dans le env_controller quand tu new_env_list ca va pas tout free si malloc foire ca exit direct.
 test de unset env et apres de lancer une commande.
+env faire le exit et test les builtins apres avoir init un minishell avec en -i
+il reste les errors de droits dans builtin a gerer.

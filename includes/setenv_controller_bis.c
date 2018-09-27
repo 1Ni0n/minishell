@@ -20,7 +20,9 @@ int	does_env_exists(char *env_name, t_env_list *env_list)
 	while (env_node)
 	{
 		if (ft_strcmp(env_name, env_node->name) == 0)
+		{
 			return (1);
+		}
 		env_node = env_node->next;
 	}
 	return (-1);
