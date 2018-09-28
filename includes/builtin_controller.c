@@ -27,9 +27,9 @@ void	check_wich_command(t_input_node *input_node, t_minish *minish)
 		exit_controller(input_node, minish);
 	else if (ft_strcmp(command, "unsetenv") == 0)
 		unsetenv_controller(input_node, minish);
-	/*else if (ft_strcmp(command, "cd") == 0)
+	else if (ft_strcmp(command, "cd") == 0)
 		cd_controller(input_node, minish);
-	else if (ft_strcmp(command, "exit") == 0)
+	/*else if (ft_strcmp(command, "exit") == 0)
 		exit_controller(input_node, minish);*/
 	//NE PAS OUBLIER DE CHECK LES VALEURS DE RETOUR DES FONCTIONS QUI MALLOC QQCHOSE PUIS FREE AND EXIT SI CA PASSE PAS
 }

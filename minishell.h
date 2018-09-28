@@ -16,6 +16,7 @@
 # include "get_next_line.h"
 # include <stdio.h>
 # include <unistd.h>
+# include <dirent.h>
 
 typedef struct 			s_input_node
 {
@@ -73,7 +74,7 @@ char					**add_command_to_paths(char *command, char **paths);
 void					print_error_path(char *command);
 void					print_env_usage(char c);
 void					refresh_minish(t_minish *minish, char **paths);
-char					**get_env(t_env_list *env_list);
+char					**get_env_tab(t_env_list *env_list);
 char					**get_av(t_input_list	*input_list);
 char					**get_input_tab(t_input_list *input_list, int command_id);
 void 					builtin_controller(t_minish *minish);
@@ -96,4 +97,14 @@ void					replace_env(t_env_node *env_node, char *tab);
 void					exit_controller(t_input_node *input_node, t_minish *minish);
 void					free_minish(t_minish *minish);
 void					unsetenv_controller(t_input_node *input_node, t_minish *minish);
+void					print_error_path_inexistant(char *path);
+void 					print_error_rights(char *path);
+void 					print_error_dir(char *path);
+char					*find_env_content(t_env_list *env_list, char *env_name);
+void					changedir_home(t_env_list *env_list);
+void					changedir_path(char *word, t_env_list *env_list);
+int 					check_path_stats(char *path);
+void					set_all_pwd(char *pwd, char *oldpwd, t_env_list *env_list);
+void					changedir_newpath(char *path, t_env_list *env_list);
+int						is_it_command(char *command);
 #endif

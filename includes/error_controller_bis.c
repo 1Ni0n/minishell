@@ -19,3 +19,24 @@ void	print_env_usage(char c)
 	ft_putstr("usage: env [-iv] [-P utilpath] [-S string] [-u name]\n");
 	ft_putstr("[name=value ...] [utility [argument ...]]\n");
 }
+
+void		print_error_path_inexistant(char *path)
+{
+	ft_putstr("cd: ");
+	ft_putstr(path);
+	ft_putstr(" :No such file or directory\n");
+}
+
+void 	print_error_rights(char *path)
+{
+	ft_putstr("cd: ");
+	ft_putstr(path);
+	ft_putstr(" :access denied\n");
+}
+
+void 	print_error_dir(char *path)
+{
+	ft_putstr("cd: ");
+	ft_putstr(path);
+	ft_putstr(" :not a dir\n");
+}

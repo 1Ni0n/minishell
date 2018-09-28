@@ -42,7 +42,7 @@ void 	fourchette(t_minish *minish, char *paths_p_command, off_t command_id)
 	char	**av_tab;
 	pid_t	pid;
 
-	env_tab = get_env(minish->env_list);
+	env_tab = get_env_tab(minish->env_list);
 	av_tab = get_input_tab(minish->input_list, command_id);
 	if ((pid = fork()) == 0)
 	{

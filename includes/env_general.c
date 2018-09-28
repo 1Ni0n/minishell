@@ -16,12 +16,15 @@ t_env_node	*env_exists(t_env_list *env_list, char *tab)
 {
 	t_env_node *env_node;
 
-	env_node = env_list->head;
-	while (env_node)
+	if (env_list)
 	{
-		if (ft_strcmp(tab, env_node->name) == 0)
-			return (env_node);
-		env_node = env_node->next;
+		env_node = env_list->head;
+		while (env_node)
+		{
+			if (ft_strcmp(tab, env_node->name) == 0)
+				return (env_node);
+			env_node = env_node->next;
+		}
 	}
 	return (NULL);
 }
@@ -56,7 +59,7 @@ void	print_env(t_env_list *env_list)
 	}
 }
 
-char	**get_env(t_env_list *env_list)
+char	**get_env_tab(t_env_list *env_list)
 {
 	t_env_node 	*env_node;
 	char		**env_tab;

@@ -48,7 +48,7 @@ void 	fourchette_bis(char *path, t_env_list *tmp_env_list, char **words, int i)
 		return ;
 	}
 	if (tmp_env_list)
-		env_tab = get_env(tmp_env_list);
+		env_tab = get_env_tab(tmp_env_list);
 	if ((pid = fork()) == 0)
 	{
 		execve(path, av_tab, env_tab);
@@ -126,8 +126,15 @@ int 	route_to_command(t_env_list *tmp_env_list, char **words, int *i)
 			j++;
 		}
 		if (set == 0)
+		{
+			if (is_it_command(words[*i]) == 1)
+			{
+				print_error_path(words[*i]);
+				return (1);
+			}
 			if (execute_command(tmp_env_list, words, *i) == 1)
 				return (1);
+		}
 	}
 	return (0);
 }
