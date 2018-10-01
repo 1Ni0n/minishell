@@ -56,6 +56,10 @@ void 	fourchette(t_minish *minish, char *paths_p_command, off_t command_id)
 		free_tabs(env_tab);
 		free_tabs(av_tab);
 	}
+	if (env_tab)
+		free_tabs(env_tab);
+	if (av_tab)
+		free_tabs(av_tab);
 	wait(&pid);
 }
 
@@ -90,6 +94,8 @@ void	commands_controller(t_input_node *input_node, t_minish *minish)
 			else
 				print_error_path(input_node->words[0]);
 		}
+		free_path_p_command(paths_p_command);
+		free_paths(paths);
 	}
 	//free_lists_and_carry_on(minish);
 }
