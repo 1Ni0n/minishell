@@ -7,3 +7,4 @@ Un truc pas tout a fait propre cest dans le env_controller quand tu new_env_list
 test de unset env et apres de lancer une commande.
 env faire le exit et test les builtins apres avoir init un minishell avec en -i
 il reste les errors de droits dans builtin a gerer.
+Il reste le cd symlinks a gerer et le parsing des expansions

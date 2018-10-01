@@ -40,3 +40,9 @@ void 	print_error_dir(char *path)
 	ft_putstr(path);
 	ft_putstr(" :not a dir\n");
 }
+
+void	print_error_env_inexistant(char *word)
+{
+	ft_putstr(word);
+	ft_putstr(": undefined variable.\n");
+}

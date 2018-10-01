@@ -12,36 +12,51 @@
 
 #include "../minishell.h"
 
-void	check_wich_command(t_input_node *input_node, t_minish *minish)
+int check_wich_command_end(char *command, t_input_node *input_node, t_minish *minish)
+{
+	if (ft_strcmp(command, "unsetenv") == 0)
+	{
+		unsetenv_controller(input_node, minish);
+		return (1);
+	}
+	if (ft_strcmp(command, "cd") == 0)
+	{
+		cd_controller(input_node, minish);
+		return (1);
+	}
+	return (-1);
+}
+
+int check_wich_command(t_input_node *input_node, t_minish *minish)
 {
 	char *command;
 
 	command = input_node->words[0];
 	if (ft_strcmp(command, "echo") == 0)
+	{
 		echo_controller(input_node->words);
-	else if (ft_strcmp(command, "setenv") == 0)
+		return (1);
+	}
+	if (ft_strcmp(command, "setenv") == 0)
+	{
 		setenv_controller(input_node, minish);
-	else if (ft_strcmp(command, "env") == 0)
+		return (1);
+	}
+	if (ft_strcmp(command, "env") == 0)
+	{
 		env_controller(input_node, minish, 0);
-	else if (ft_strcmp(command, "exit") == 0)
+		return (1);
+	}
+	if (ft_strcmp(command, "exit") == 0)
+	{
 		exit_controller(input_node, minish);
-	else if (ft_strcmp(command, "unsetenv") == 0)
-		unsetenv_controller(input_node, minish);
-	else if (ft_strcmp(command, "cd") == 0)
-		cd_controller(input_node, minish);
-	/*else if (ft_strcmp(command, "exit") == 0)
-		exit_controller(input_node, minish);*/
+		return (1);
+	}
+	return (check_wich_command_end(command, input_node, minish));
 	//NE PAS OUBLIER DE CHECK LES VALEURS DE RETOUR DES FONCTIONS QUI MALLOC QQCHOSE PUIS FREE AND EXIT SI CA PASSE PAS
 }
 
-void	builtin_controller(t_minish *minish)
+int	builtin_controller(t_input_node *input_node, t_minish *minish)
 {
-	t_input_node *input_node;
-
-	input_node = minish->input_list->head;
-	while (input_node)
-	{
-		check_wich_command(input_node, minish);
-		input_node = input_node->next;
-	}
+	return (check_wich_command(input_node, minish));
 }

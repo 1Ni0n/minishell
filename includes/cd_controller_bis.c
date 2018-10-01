@@ -47,6 +47,8 @@ void	changedir_oldpwd(t_env_list *env_list)
 			if ((error = check_path_stats(path)) == -1)
 				return ;
 			oldpwd = getcwd(pwd, 0);
+			ft_putstr(path);
+			ft_putchar('\n');
 			chdir(path);
 			pwd = getcwd(pwd, 0);
 			set_all_pwd(pwd, oldpwd, env_list);

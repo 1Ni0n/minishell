@@ -39,8 +39,7 @@ void	start_loop(t_minish *minish)
 		if (get_next_line(1, &line) == 1)
 		{
 			get_prompt(&line, minish);
-			builtin_controller(minish);
-			commands_controller(minish);
+			routeur(minish);
 		}
 		else
 			write(1, "\n", 1);
@@ -52,10 +51,14 @@ void	refresh_minish(t_minish *minish, char **paths)
 	off_t	i;
 
 	i = 0;
-	while (paths[i])
-		free(paths[i++]);
+	if (paths)
+	{
+		while (paths[i])
+			free(paths[i++]);
+	}
 	free(paths);
 	free_input_list(minish->input_list);
+	free_env_list(minish->env_list);
 	start_loop(minish);
 }
 

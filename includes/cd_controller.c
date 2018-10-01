@@ -22,22 +22,22 @@ void	set_all_pwd(char *pwd, char *oldpwd, t_env_list *env_list)
 	else
 	{
 		if (!(tab = (char**)malloc(sizeof(char*) * (3))))
-			exit(1)
+			exit(1);
 		tab[0] = ft_strdup("PWD");
 		tab[1] = ft_strdup(pwd);
 		tab[2] = NULL;
-		append_to_env_list(env_list, tab)
+		append_to_env_list(env_list, tab);
 	}
 	if ((env_node = env_exists(env_list, "OLDPWD")) != NULL)
 		replace_env(env_node, oldpwd);
 	else
 	{
 		if (!(tab = (char**)malloc(sizeof(char*) * (3))))
-			exit(1)
+			exit(1);
 		tab[0] = ft_strdup("OLDPWD");
 		tab[1] = ft_strdup(oldpwd);
 		tab[2] = NULL;
-		append_to_env_list(env_list, tab)
+		append_to_env_list(env_list, tab);
 	}
 }
 
@@ -101,7 +101,7 @@ void	cd_controller(t_input_node *input_node, t_minish *minish)
 		i++;
 	if (i >= 3)
 	{
-		ft_putstr("Cd: Too many arguments\n");
+		ft_putstr("minishell: cd: Too many arguments\n");
 		return ;
 	}
 	if (i == 1)

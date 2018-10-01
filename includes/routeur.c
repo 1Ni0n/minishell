@@ -1,25 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   routeur.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aguillot <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/15 15:03:36 by aguillot          #+#    #+#             */
-/*   Updated: 2018/10/01 15:57:43 by aguillot         ###   ########.fr       */
+/*   Created: 2018/10/01 14:12:06 by aguillot          #+#    #+#             */
+/*   Updated: 2018/10/01 14:12:07 by aguillot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <string.h>
-#include "libft.h"
+#include "../minishell.h"
 
-size_t	ft_strlen(const char *s)
+void	routeur(t_minish *minish)
 {
-	size_t	i;
+	t_input_node *input_node;
 
-	i = 0;
-	if (s)
-		while (s[i])
-			i++;
-	return (i);
+	input_node = minish->input_list->head;
+	while (input_node)
+	{
+		if (expansions_controller(input_node, minish) == 1)
+		{
+			if (builtin_controller(input_node, minish) == -1)
+				commands_controller(input_node, minish);
+		}
+		input_node = input_node->next;
+	}
 }
