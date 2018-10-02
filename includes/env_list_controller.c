@@ -63,7 +63,7 @@ t_env_list	*new_env_list(void)
 	t_env_list 	*env_list;
 
 	env_list = NULL;
-	if ((env_list = malloc(sizeof(*env_list))) == NULL)
+	if ((env_list = (t_env_list*)malloc(sizeof(*env_list))) == NULL)
 		env_malloc_error(env_list);
 	env_list->length = 0;
 	env_list->head = NULL;

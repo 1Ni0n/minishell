@@ -111,6 +111,6 @@ void					routeur(t_minish *minish);
 int 					expansions_controller(t_input_node *input_node, t_minish *minish);
 void 	 				print_error_env_inexistant(char *word);
 int 					manage_money(t_env_list *env_list, char **words);
-void					free_path_p_command(char **path_pc);
-void					free_paths(char **paths);
+void					free_double_tab(char **tab);
+void					delete_env_node(t_env_node *env_node, t_env_node *previous, t_env_list *env_list);
 #endif

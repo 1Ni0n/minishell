@@ -79,7 +79,7 @@ void	commands_controller(t_input_node *input_node, t_minish *minish)
 		if ((paths_p_command = add_command_to_paths(input_node->words[0], paths)) == NULL)
 		{
 			print_error_path(input_node->words[0]);
-			refresh_minish(minish, paths);
+			//refresh_minish(minish, paths);
 		}
 		else
 		{
@@ -94,8 +94,8 @@ void	commands_controller(t_input_node *input_node, t_minish *minish)
 			else
 				print_error_path(input_node->words[0]);
 		}
-		free_path_p_command(paths_p_command);
-		free_paths(paths);
+		free_double_tab(paths_p_command);
+		free_double_tab(paths);
 	}
 	//free_lists_and_carry_on(minish);
 }

@@ -14,11 +14,14 @@
 
 void	free_minish(t_minish *minish)
 {
-	if (minish->env_list)
-		free_env_list(minish->env_list);
-	if  (minish->input_list)
-		free_input_list(minish->input_list);
-	free(minish);
+	if (minish)
+	{
+		if (minish->env_list)
+			free_env_list(minish->env_list);
+		if  (minish->input_list)
+			free_input_list(minish->input_list);
+		free(minish);
+	}
 }
 
 void	print_prompt()
@@ -67,7 +70,7 @@ void	init_minishell(char **av, char **env)
 	t_minish	*minish;
 
 	(void)av;
-	if ((minish = malloc(sizeof(minish))) == NULL)
+	if ((minish = malloc(sizeof(*minish))) == NULL)
 	{
 		ft_putstr("Malloc failed. Out of Memory. Exiting program...\n");
 		exit(1);

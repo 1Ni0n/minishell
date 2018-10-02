@@ -83,23 +83,24 @@ int 	execute_command(t_env_list *tmp_env_list, char **words, int i)
 	else
 	{
 		paths_p_command = add_command_to_paths(words[i], paths);
-		while (paths_p_command[b])
+		if (paths_p_command)
 		{
-			if (access(paths_p_command[b], X_OK) == 0 || access(paths_p_command[b], R_OK) == 0)
-				break;
-			b++;
+			while (paths_p_command[b])
+			{
+				if (access(paths_p_command[b], X_OK) == 0 || access(paths_p_command[b], R_OK) == 0)
+					break;
+				b++;
+			}
+			if (paths_p_command[b])
+			{
+				fourchette_bis(paths_p_command[b], tmp_env_list, words, i);
+				return (1);
+			}
 		}
-		if (paths_p_command[b])
-		{
-			fourchette_bis(paths_p_command[b], tmp_env_list, words, i);
-			return (1);
-		}
-		else
-		{
-			print_error_path(words[i]);
-			return (0);
-		}
+		print_error_path(words[i]);
+		return (0);
 	}
+	return (0);
 }
 
 int 	route_to_command(t_env_list *tmp_env_list, char **words, int *i)

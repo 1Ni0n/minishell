@@ -24,8 +24,8 @@ void	free_tab(char **tab)
 			free(tab[i]);
 			i++;
 		}
+		free(tab);
 	}
-	free(tab);
 }
 
 void 	parse_env(char **env, t_minish *minish)
@@ -40,12 +40,15 @@ void 	parse_env(char **env, t_minish *minish)
 		env_malloc_error(env_list);
 	if (env)
 	{
-		while (env[i])
+		if (env[0])
 		{
-			tab = ft_strsplit(env[i], '=');
-			append_to_env_list(env_list, tab);
-			free_tab(tab);
-			i++;
+			while (env[i])
+			{
+				tab = ft_strsplit(env[i], '=');
+				append_to_env_list(env_list, tab);
+				free_tab(tab);
+				i++;
+			}
 		}
 	}
 	minish->env_list = env_list;

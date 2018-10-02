@@ -46,6 +46,7 @@ int 	check_path_stats(char *path)
 	struct stat sb;
 	DIR			*dir_struct;
 
+	dir_struct = NULL;
 	if (lstat(path, &sb) == -1)
 	{
 		print_error_path_inexistant(path);
@@ -61,6 +62,7 @@ int 	check_path_stats(char *path)
 		print_error_rights(path);
 		return (-1);
 	}
+	closedir(dir_struct);
 	return (1);
 }
 

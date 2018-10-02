@@ -29,31 +29,67 @@ void	rejoin_word(char **tmp, char **word)
 	}
 }
 
-int		start_replacement(char **word, t_env_list *env_list)
+int		find_noalnum(char *tmp)
 {
-	char 	**tmp;
-	off_t	i;
-	char 	*env_content;
+	off_t i;
 
 	i = 0;
-	if ((tmp = ft_strsplit(*word, '$')) != NULL)
+	printf("TMP: %s\n", tmp);
+	while (tmp[i])
 	{
-		while (tmp[i])
+		if (ft_isalnum(tmp[i]) == 0)
+			return (i);
+		i++;
+	}
+	return (-1);
+}
+
+int		modify_word(char **word, t_env_list *env_list, off_t i)
+{
+	char 	*tmpstart;
+	char 	*tmpend;
+	char	*var;
+	off_t	j;
+
+	tmpend = NULL;
+	var = NULL;
+	tmpstart = ft_strsub(*word, 0, i);
+	printf("%s\n", tmpstart);
+	if ((j = find_noalnum(*word + i + 1)) != -1)
+	{
+		tmpend = ft_strdup((*word) + j);
+		printf("%s\n", tmpend);
+		if ((var = find_env_content(env_list, tmpend)) != NULL)
 		{
-			if ((env_content = find_env_content(env_list, tmp[i])) != NULL)
-			{
-				free(tmp[i]);
-				tmp[i] = ft_strdup(env_content);
-			}
-			else
-			{
-				print_error_env_inexistant(tmp[i]);
-				return (-1);
-			}
-			i++;
+			free(*word);
+			(*word) = tmpstart;
+			(*word) = ft_strlink(word, var);
+			free(tmpend);
+			return (1);
 		}
 	}
-	rejoin_word(tmp, word);
+	else
+	{
+		tmpend = ft_strdup((*word) + i);
+		if ((var = find_env_content(env_list, tmpend)) != NULL)
+		{
+			free(*word);
+			(*word) = tmpstart;
+			(*word) = ft_strlink(word, var);
+			free(tmpend);
+			return (1);
+		}
+	}
+	printf("ERROR\n");
+	return (-1);
+}
+
+int		start_replacement(char **words, t_env_list *env_list)
+{
+	off_t	i;
+
+	while ((i = ft_strichr(*words, '$')) != -1)
+		return (modify_word(words, env_list, i));
 	return (1);
 }
 

@@ -25,27 +25,6 @@ void		free_lists_and_carry_on(t_minish *minish)
 	free_input_list(minish->input_list);
 }
 
-void		free_all_and_exit(t_minish *minish, char **line, char **commands)
-{
-	int	i;
-
-	i = 0;
-	free_env_list(minish->env_list);
-	free(minish);
-	if (line)
-		free(*line);
-	if (commands)
-	{
-		while (commands[i])
-		{
-			free(commands[i]);
-			i++;
-		}
-		free(commands);
-	}
-	exit(1);
-}
-
 void		env_malloc_error(t_env_list *env_list)
 {
 	free_env_list(env_list);

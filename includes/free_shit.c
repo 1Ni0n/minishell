@@ -12,20 +12,44 @@
 
 #include "../minishell.h"
 
-void	free_path_p_command(char **path_pc)
+void	free_double_tab(char **tab)
 {
 	off_t	i;
 
 	i = 0;
-	if (path_pc)
+	if (tab)
 	{
-		while (path_pc[i])
+		while (tab[i])
 		{
-			free(path_pc[i]);
+			free(tab[i]);
 			i++;
 		}
-		free(path_pc);
+		free(tab);
 	}
+}
+
+void		free_all_and_exit(t_minish *minish, char **line, char **commands)
+{
+	int	i;
+
+	i = 0;
+	if (minish->env_list)
+		free_env_list(minish->env_list);
+	if (minish->input_list)
+		free_input_list(minish->input_list);
+	free(minish);
+	if (line)
+		free(*line);
+	if (commands)
+	{
+		while (commands[i])
+		{
+			free(commands[i]);
+			i++;
+		}
+		free(commands);
+	}
+	exit(1);
 }
 
 void	free_paths(char **paths)
