@@ -18,10 +18,10 @@ void		free_input_list(t_input_list *input_list)
 	t_input_node	*tmp;
 	off_t			i;
 
-	i = 0;
 	input_node = input_list->head;
 	while (input_node)
 	{
+		i = 0;
 		if (input_node->words)
 		{
 			while (input_node->words[i])

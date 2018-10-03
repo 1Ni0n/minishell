@@ -19,7 +19,9 @@ char	*handle_quotes(char *line)
 	char	*tmp;
 
 	i = 0;
-	clean_line = (char*)malloc(sizeof(char) * (1));
+	tmp = NULL;
+	if ((clean_line = (char*)malloc(sizeof(char) * (1))) == NULL)
+		exit (1);
 	clean_line[0] = '\0';
 	while (line[i])
 	{
@@ -37,8 +39,7 @@ char	*handle_quotes(char *line)
 			i++;
 		}
 	}
-	tmp = clean_line;
-	clean_line = ft_strtrim(clean_line);
-	free(tmp);
-	return (clean_line);
+	tmp = ft_strtrim(clean_line);
+	free(clean_line);
+	return (tmp);
 }

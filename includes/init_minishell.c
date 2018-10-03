@@ -43,6 +43,7 @@ void	start_loop(t_minish *minish)
 		{
 			get_prompt(&line, minish);
 			routeur(minish);
+			free_input_list(minish->input_list);
 		}
 		else
 			write(1, "\n", 1);

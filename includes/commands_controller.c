@@ -20,7 +20,7 @@ void	free_tabs(char **tab)
 	i = 0;
 	while (tab[i])
 	{
-		free(tab[i]);
+		ft_strdel(&tab[i]);
 		i++;
 	}
 	free(tab);
@@ -71,31 +71,31 @@ void	commands_controller(t_input_node *input_node, t_minish *minish)
 	char			**paths_p_command;
 
 	i = 0;
-	if (access(input_node->words[0], X_OK) == 0 || access(input_node->words[0], R_OK) == 0)
-		fourchette(minish, input_node->words[0], input_node->command_id);
-	else
+	if (input_node->words[0][0] != '$')
 	{
-		paths = get_paths(minish->env_list);
-		if ((paths_p_command = add_command_to_paths(input_node->words[0], paths)) == NULL)
-		{
-			print_error_path(input_node->words[0]);
-			//refresh_minish(minish, paths);
-		}
+		if (access(input_node->words[0], X_OK) == 0 || access(input_node->words[0], R_OK) == 0)
+			fourchette(minish, input_node->words[0], input_node->command_id);
 		else
 		{
-			while(paths_p_command[i])
-			{
-				if (access(paths_p_command[i], X_OK) == 0 || access(paths_p_command[i], R_OK) == 0)
-					break;
-				i++;
-			}
-			if (paths_p_command[i])
-				fourchette(minish, paths_p_command[i], input_node->command_id);
-			else
+			paths = get_paths(minish->env_list);
+			if ((paths_p_command = add_command_to_paths(input_node->words[0], paths)) == NULL)
 				print_error_path(input_node->words[0]);
+			else
+			{
+				while(paths_p_command[i])
+				{
+					if (access(paths_p_command[i], X_OK) == 0 || access(paths_p_command[i], R_OK) == 0)
+						break;
+					i++;
+				}
+				if (paths_p_command[i])
+					fourchette(minish, paths_p_command[i], input_node->command_id);
+				else
+					print_error_path(input_node->words[0]);
+			}
+			free_double_tab(paths_p_command);
+			free_double_tab(paths);
 		}
-		free_double_tab(paths_p_command);
-		free_double_tab(paths);
+		//free_lists_and_carry_on(minish);
 	}
-	//free_lists_and_carry_on(minish);
 }

@@ -54,10 +54,10 @@ void	manage_tildes(t_env_list *env_list, char **words)
 	}
 }
 
-int 	expansions_controller(t_input_node *input_node, t_minish *minish)
+void 	expansions_controller(t_input_node *input_node, t_minish *minish)
 {
 	if (look_for_expansion(input_node->words) == -1)
-		return (1);
+		return ;
 	manage_tildes(minish->env_list, input_node->words);
-	return (manage_money(minish->env_list, input_node->words));
+	manage_money(minish->env_list, input_node->words);
 }

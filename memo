@@ -9,3 +9,4 @@ env faire le exit et test les builtins apres avoir init un minishell avec en -i
 il reste les errors de droits dans builtin a gerer.
 Il reste le cd symlinks a gerer et le parsing des expansions
 expansions pas alphanum $
+leak in ft_splitwhitespaces.c

@@ -67,3 +67,19 @@ void	free_paths(char **paths)
 		free(paths);
 	}
 }
+
+void	free_c(t_char_struct *c)
+{
+	if (c)
+	{
+		if (c->start)
+			ft_strdel(&(c->start));
+		if (c->middle)
+			ft_strdel(&(c->middle));
+		if (c->end)
+			ft_strdel(&(c->end));
+		if (c->var)
+			ft_strdel(&(c->var));
+		free(c);
+	}
+}

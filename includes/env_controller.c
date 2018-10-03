@@ -89,6 +89,8 @@ void	env_recursive(t_input_node *input_node, t_minish *minish, int i, t_env_list
 	}
 	if (words[i])
 		env_recursive(input_node, minish, i, tmp_env_list);
+	if (tmp_env_list)
+		free_env_list(tmp_env_list);
 }
 
 void	env_controller(t_input_node *input_node, t_minish *minish, int i)
@@ -97,4 +99,6 @@ void	env_controller(t_input_node *input_node, t_minish *minish, int i)
 	
 	tmp_env_list = dup_env_list(minish->env_list->head);
 	env_recursive(input_node, minish, i, tmp_env_list);
+	if (tmp_env_list)
+		free_env_list(tmp_env_list);
 }

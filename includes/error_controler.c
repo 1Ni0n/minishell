@@ -39,3 +39,10 @@ void	free_minish_and_exit(t_minish *minish)
 	free(minish);
 	exit(1);
 }
+
+void	print_error_var_inexistant(char *var)
+{
+	ft_putstr("minishell: ");
+	ft_putstr(var);
+	ft_putstr(": Undefined variable\n");
+}

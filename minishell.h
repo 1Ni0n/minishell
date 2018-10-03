@@ -18,6 +18,15 @@
 # include <unistd.h>
 # include <dirent.h>
 
+typedef struct 			s_char_struct
+{
+	char 				*start;
+	char 				*end;
+	char 				*middle;
+	char 				*var;
+	off_t				j;
+}						t_char_struct;
+
 typedef struct 			s_input_node
 {
 	char				**words;
@@ -108,9 +117,13 @@ void					set_all_pwd(char *pwd, char *oldpwd, t_env_list *env_list);
 void					changedir_newpath(char *path, t_env_list *env_list);
 int						is_it_command(char *command);
 void					routeur(t_minish *minish);
-int 					expansions_controller(t_input_node *input_node, t_minish *minish);
+void  					expansions_controller(t_input_node *input_node, t_minish *minish);
 void 	 				print_error_env_inexistant(char *word);
-int 					manage_money(t_env_list *env_list, char **words);
+void 					manage_money(t_env_list *env_list, char **words);
+int						modify_word(char **word, t_env_list *env_list, off_t i);
 void					free_double_tab(char **tab);
 void					delete_env_node(t_env_node *env_node, t_env_node *previous, t_env_list *env_list);
+void					print_error_var_inexistant(char *var);
+int						find_noalnum(char *tmp);
+void					free_c(t_char_struct *c);
 #endif

@@ -19,11 +19,9 @@ void	routeur(t_minish *minish)
 	input_node = minish->input_list->head;
 	while (input_node)
 	{
-		if (expansions_controller(input_node, minish) == 1)
-		{
-			if (builtin_controller(input_node, minish) == -1)
-				commands_controller(input_node, minish);
-		}
+		expansions_controller(input_node, minish);
+		if (builtin_controller(input_node, minish) == -1)
+			commands_controller(input_node, minish);
 		input_node = input_node->next;
 	}
 }
