@@ -30,6 +30,7 @@ typedef struct 			s_char_struct
 typedef struct 			s_input_node
 {
 	char				**words;
+	char 				*trimmed_command;
 	off_t				word_count;
 	off_t				command_id;
 	struct s_input_node	*next;

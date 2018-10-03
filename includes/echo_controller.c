@@ -24,6 +24,8 @@ void	daaamn(off_t i, char **words)
 			write(1, &words[i][j], 1);
 			j++;
 		}
+		if (words[i + 1])
+			write(1, " ", 1);
 		i++;
 	}
 }

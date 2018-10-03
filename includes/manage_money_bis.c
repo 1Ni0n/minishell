@@ -14,6 +14,7 @@
 
 int 	modify_word_middle(t_char_struct *c, char **word)
 {
+	ft_strdel(word);
 	(*word) = ft_strdup(c->start);
 	(*word) = ft_strlink(word, c->var);
 	(*word) = ft_strlink(word, c->end);
@@ -23,6 +24,7 @@ int 	modify_word_middle(t_char_struct *c, char **word)
 
 int 	modify_word_end(char **word, t_char_struct *c)
 {
+	ft_strdel(word);
 	(*word) = ft_strdup(c->start);
 	(*word) = ft_strlink(word, c->var);
 	free_c(c);

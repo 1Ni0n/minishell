@@ -78,8 +78,6 @@ void	free_c(t_char_struct *c)
 			ft_strdel(&(c->middle));
 		if (c->end)
 			ft_strdel(&(c->end));
-		if (c->var)
-			ft_strdel(&(c->var));
 		free(c);
 	}
 }

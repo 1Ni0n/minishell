@@ -34,6 +34,7 @@ void	replace_tilde(char *home, char **word)
 	free(*word);
 	(*word) = ft_strdup(home);
 	(*word) = ft_strlink(word, ptr);
+	free(ptr);
 }
 
 void	manage_tildes(t_env_list *env_list, char **words)
