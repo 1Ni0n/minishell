@@ -6,13 +6,13 @@
 /*   By: aguillot <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/02 16:35:00 by aguillot          #+#    #+#             */
-/*   Updated: 2018/10/03 11:56:16 by aguillot         ###   ########.fr       */
+/*   Updated: 2018/10/04 17:03:50 by aguillot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int 	modify_word_middle(t_char_struct *c, char **word)
+int				modify_word_middle(t_char_struct *c, char **word)
 {
 	ft_strdel(word);
 	(*word) = ft_strdup(c->start);
@@ -22,7 +22,7 @@ int 	modify_word_middle(t_char_struct *c, char **word)
 	return (1);
 }
 
-int 	modify_word_end(char **word, t_char_struct *c)
+int				modify_word_end(char **word, t_char_struct *c)
 {
 	ft_strdel(word);
 	(*word) = ft_strdup(c->start);
@@ -31,13 +31,14 @@ int 	modify_word_end(char **word, t_char_struct *c)
 	return (1);
 }
 
-int 	return_error_inexistant_one(t_char_struct *c)
+int				return_error_inexistant_one(t_char_struct *c, char **word)
 {
+	ft_strdel(word);
 	free_c(c);
 	return (-1);
 }
 
-t_char_struct	*init_c()
+t_char_struct	*init_c(void)
 {
 	t_char_struct *c;
 
@@ -51,7 +52,7 @@ t_char_struct	*init_c()
 	return (c);
 }
 
-int		modify_word(char **word, t_env_list *env_list, off_t i)
+int				modify_word(char **word, t_env_list *env_list, off_t i)
 {
 	t_char_struct	*c;
 
@@ -65,7 +66,7 @@ int		modify_word(char **word, t_env_list *env_list, off_t i)
 		if ((c->var = find_env_content(env_list, c->middle)) != NULL)
 			return (modify_word_middle(c, word));
 		else
-			return (return_error_inexistant_one(c));
+			return (return_error_inexistant_one(c, word));
 	}
 	else
 	{
@@ -73,7 +74,7 @@ int		modify_word(char **word, t_env_list *env_list, off_t i)
 		if ((c->var = find_env_content(env_list, c->end)) != NULL)
 			return (modify_word_end(word, c));
 		else
-			return (return_error_inexistant_one(c));
+			return (return_error_inexistant_one(c, word));
 	}
 	return (-1);
 }

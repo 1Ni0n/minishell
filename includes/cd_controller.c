@@ -27,6 +27,7 @@ void	set_all_pwd(char *pwd, char *oldpwd, t_env_list *env_list)
 		tab[1] = ft_strdup(pwd);
 		tab[2] = NULL;
 		append_to_env_list(env_list, tab);
+		free_double_tab(tab);
 	}
 	if ((env_node = env_exists(env_list, "OLDPWD")) != NULL)
 		replace_env(env_node, oldpwd);
@@ -38,6 +39,7 @@ void	set_all_pwd(char *pwd, char *oldpwd, t_env_list *env_list)
 		tab[1] = ft_strdup(oldpwd);
 		tab[2] = NULL;
 		append_to_env_list(env_list, tab);
+		free_double_tab(tab);
 	}
 }
 

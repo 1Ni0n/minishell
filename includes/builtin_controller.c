@@ -31,7 +31,8 @@ int check_wich_command(t_input_node *input_node, t_minish *minish)
 {
 	char *command;
 
-	command = input_node->words[0];
+	if ((command = input_node->words[0]) == NULL)
+		return (-1);
 	if (ft_strcmp(command, "echo") == 0)
 	{
 		echo_controller(input_node->words);

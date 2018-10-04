@@ -1,27 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   routeur.c                                          :+:      :+:    :+:   */
+/*   error_controller_ter.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aguillot <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/10/01 14:12:06 by aguillot          #+#    #+#             */
-/*   Updated: 2018/10/04 17:07:28 by aguillot         ###   ########.fr       */
+/*   Created: 2018/10/04 16:38:40 by aguillot          #+#    #+#             */
+/*   Updated: 2018/10/04 16:38:43 by aguillot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	routeur(t_minish *minish)
+void	print_is_dir(char *dir)
 {
-	t_input_node *input_node;
-
-	input_node = minish->input_list->head;
-	while (input_node)
-	{
-		expansions_controller(input_node, minish);
-		if (builtin_controller(input_node, minish) == -1)
-			commands_controller(input_node, minish);
-		input_node = input_node->next;
-	}
+	ft_putstr(dir);
+	ft_putstr(": Is a directory\n");
 }

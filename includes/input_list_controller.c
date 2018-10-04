@@ -6,13 +6,13 @@
 /*   By: aguillot <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/14 14:57:05 by aguillot          #+#    #+#             */
-/*   Updated: 2018/09/14 14:57:07 by aguillot         ###   ########.fr       */
+/*   Updated: 2018/10/04 17:19:24 by aguillot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void		free_input_list(t_input_list *input_list)
+void			free_input_list(t_input_list *input_list)
 {
 	t_input_node	*input_node;
 	t_input_node	*tmp;
@@ -51,7 +51,22 @@ off_t			count_em(char **tab)
 	return (i);
 }
 
-t_input_list	*append_to_input_list(t_input_list *input_list, char *command, off_t command_id)
+void			append_end(t_input_list *input_list, t_input_node *input_node)
+{
+	if (input_list->head == NULL)
+		input_list->head = input_node;
+	if (input_list->tail == NULL)
+		input_list->tail = input_node;
+	else
+	{
+		input_list->tail->next = input_node;
+		input_list->tail = input_node;
+	}
+	input_list->length++;
+}
+
+t_input_list	*append_to_input_list(t_input_list *input_list, char *command,\
+		off_t command_id)
 {
 	t_input_node	*input_node;
 	off_t			i;
@@ -69,16 +84,7 @@ t_input_list	*append_to_input_list(t_input_list *input_list, char *command, off_
 		input_node->word_count = count_em(input_node->words);
 		input_node->command_id = command_id;
 		input_node->next = NULL;
-		if (input_list->head == NULL)
-			input_list->head = input_node;
-		if (input_list->tail == NULL)
-			input_list->tail = input_node;
-		else
-		{
-			input_list->tail->next = input_node;
-			input_list->tail = input_node;
-		}
-		input_list->length++;
+		append_end(input_list, input_node);
 	}
 	return (input_list);
 }

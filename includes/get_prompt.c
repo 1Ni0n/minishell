@@ -6,7 +6,7 @@
 /*   By: aguillot <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/06 16:54:44 by aguillot          #+#    #+#             */
-/*   Updated: 2018/09/06 16:54:46 by aguillot         ###   ########.fr       */
+/*   Updated: 2018/10/04 17:33:24 by aguillot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	free_commands(char **commands)
 		while (commands[i])
 		{
 			free(commands[i]);
-			i++;		
+			i++;
 		}
 	}
 	free(commands);
@@ -30,8 +30,8 @@ void	free_commands(char **commands)
 
 void	split_commands(t_input_list *input_list, char **line, t_minish *minish)
 {
-	char 		**commands;
-	off_t 		i;
+	char		**commands;
+	off_t		i;
 	char		*trimmed_command;
 
 	commands = ft_strsplit(*line, ';');

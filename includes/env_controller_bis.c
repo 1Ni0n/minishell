@@ -52,14 +52,14 @@ void 	fourchette_bis(char *path, t_env_list *tmp_env_list, char **words, int i)
 	if ((pid = fork()) == 0)
 	{
 		execve(path, av_tab, env_tab);
-		free_tabs(env_tab);
-		free_tabs(av_tab);
+		free_double_tab(env_tab);
+		free_double_tab(av_tab);
 	}
 	else if (pid < 0)
 	{
 		ft_putstr("Error: Fork failed to create a new process.\n");
-		free_tabs(env_tab);
-		free_tabs(av_tab);
+		free_double_tab(env_tab);
+		free_double_tab(av_tab);
 	}
 	wait(&pid);
 }

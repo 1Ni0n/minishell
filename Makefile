@@ -25,7 +25,7 @@ handle_quotes_backslash.c builtin_controller.c echo_controller.c\
 setenv_controller.c setenv_controller_bis.c env_controller.c cd_controller.c\
 error_controller_bis.c env_general.c env_controller_bis.c exit_controller.c\
 unsetenv_controller.c env_general_bis.c cd_controller_bis.c routeur.c expansions_controller.c\
-manage_money.c manage_money_bis.c free_shit.c env_list_controller_bis.c
+manage_money.c manage_money_bis.c free_shit.c env_list_controller_bis.c error_controller_ter.c
 
 INCLUDES = $(addprefix $(INC_DIR), $(INC_FILES))
 
@@ -35,7 +35,7 @@ commands_controller.o paths_controller.o input_controller.o handle_quotes_backsl
 builtin_controller.o echo_controller.o setenv_controller.o setenv_controller_bis.o\
 cd_controller.o env_controller.o error_controller_bis.o env_general.o env_controller_bis.o\
 exit_controller.o unsetenv_controller.o env_general_bis.o cd_controller_bis.o routeur.o expansions_controller.o\
-manage_money.o free_shit.o env_list_controller_bis.o manage_money_bis.o
+manage_money.o free_shit.o env_list_controller_bis.o manage_money_bis.o error_controller_ter.o
 
 all: $(NAME)
 

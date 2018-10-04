@@ -6,7 +6,7 @@
 /*   By: aguillot <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/06 12:40:16 by aguillot          #+#    #+#             */
-/*   Updated: 2018/09/06 12:40:18 by aguillot         ###   ########.fr       */
+/*   Updated: 2018/10/04 17:20:58 by aguillot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,13 @@ void	free_minish(t_minish *minish)
 	{
 		if (minish->env_list)
 			free_env_list(minish->env_list);
-		if  (minish->input_list)
+		if (minish->input_list)
 			free_input_list(minish->input_list);
 		free(minish);
 	}
 }
 
-void	print_prompt()
+void	print_prompt(void)
 {
 	ft_putstr("@42");
 	ft_putstr(RED);
@@ -34,19 +34,22 @@ void	print_prompt()
 
 void	start_loop(t_minish *minish)
 {
-	char *line;
+	char	*line;
+	int		ret;
 
 	while (1)
 	{
 		print_prompt();
-		if (get_next_line(1, &line) == 1)
+		if ((ret = get_next_line(1, &line)) == 1)
 		{
 			get_prompt(&line, minish);
 			routeur(minish);
 			free_input_list(minish->input_list);
 		}
-		else
+		else if (ret == 0)
 			write(1, "\n", 1);
+		else
+			exit(1);
 	}
 }
 

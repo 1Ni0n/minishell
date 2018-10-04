@@ -6,7 +6,7 @@
 /*   By: aguillot <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/01 19:28:00 by aguillot          #+#    #+#             */
-/*   Updated: 2018/10/01 19:28:01 by aguillot         ###   ########.fr       */
+/*   Updated: 2018/10/04 17:08:26 by aguillot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int		start_replacement(char **words, t_env_list *env_list)
 	return (1);
 }
 
-void 	manage_money(t_env_list *env_list, char **words)
+void	manage_money(t_env_list *env_list, char **words)
 {
 	off_t	i;
 

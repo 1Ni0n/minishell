@@ -21,9 +21,9 @@ void		free_env_list(t_env_list *env_list)
 	while (env_node)
 	{
 		if (env_node->name)
-			free(env_node->name);
+			ft_strdel(&env_node->name);
 		if (env_node->content)
-			free(env_node->content);
+			ft_strdel(&env_node->content);
 		tmp = env_node;
 		env_node = env_node->next;
 		free(tmp);

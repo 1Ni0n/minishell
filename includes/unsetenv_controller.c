@@ -6,7 +6,7 @@
 /*   By: aguillot <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/27 15:42:24 by aguillot          #+#    #+#             */
-/*   Updated: 2018/09/27 15:42:40 by aguillot         ###   ########.fr       */
+/*   Updated: 2018/10/04 17:05:18 by aguillot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void	unset_the_env(char *word, t_env_list *env_list)
 {
-	t_env_node 	*env_node;
-	t_env_node 	*previous;
+	t_env_node	*env_node;
+	t_env_node	*previous;
 
 	env_node = env_list->head;
 	previous = NULL;
@@ -33,8 +33,8 @@ void	unset_the_env(char *word, t_env_list *env_list)
 
 void	unsetenv_controller(t_input_node *input_node, t_minish *minish)
 {
-	char 	**words;
-	int 	i;
+	char	**words;
+	int		i;
 
 	i = 0;
 	words = input_node->words;

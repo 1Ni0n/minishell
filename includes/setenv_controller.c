@@ -6,7 +6,7 @@
 /*   By: aguillot <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/24 16:44:21 by aguillot          #+#    #+#             */
-/*   Updated: 2018/09/24 16:44:22 by aguillot         ###   ########.fr       */
+/*   Updated: 2018/10/04 17:00:44 by aguillot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	free_command(char **command)
 	free(command);
 }
 
-int 	check_if_alphanum(char *str)
+int		check_if_alphanum(char *str)
 {
 	off_t	i;
 
@@ -38,7 +38,8 @@ int 	check_if_alphanum(char *str)
 		if (!((str[i] >= 42 && str[i] <= 57) || (str[i] >= 65 &&\
 			str[i] <= 90) || (str[i] >= 97 && str[i] <= 122)))
 		{
-			ft_putstr("setenv: Variable name must contain alphanumeric characters.\n");
+			ft_putstr("setenv: Variable name must contain alphanumeric\
+					characters.\n");
 			return (-1);
 		}
 		i++;
@@ -48,9 +49,9 @@ int 	check_if_alphanum(char *str)
 
 int		set_the_env(t_input_node *input_node, t_minish *minish)
 {
-	char 	**new_env;
+	char	**new_env;
 	char	**command;
-	int 	i;
+	int		i;
 
 	i = 0;
 	new_env = NULL;
@@ -66,9 +67,10 @@ int		set_the_env(t_input_node *input_node, t_minish *minish)
 
 int		setenv_controller(t_input_node *input_node, t_minish *minish)
 {
-	char 	**command;
+	char	**command;
 
 	command = input_node->words;
+	printf("%s\n", command[1]);
 	if (input_node->word_count >= 4)
 	{
 		ft_putstr("setenv: Too many arguments.\n");

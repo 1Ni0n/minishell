@@ -6,7 +6,7 @@
 /*   By: aguillot <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/06 12:35:54 by aguillot          #+#    #+#             */
-/*   Updated: 2018/09/06 12:35:55 by aguillot         ###   ########.fr       */
+/*   Updated: 2018/10/04 17:07:11 by aguillot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,11 @@ void	free_tab(char **tab)
 	}
 }
 
-void 	parse_env(char **env, t_minish *minish)
+void	parse_env(char **env, t_minish *minish)
 {
 	t_env_list	*env_list;
 	char		**tab;
-	int 		i;
+	int			i;
 
 	i = 0;
 	env_list = NULL;
@@ -56,14 +56,14 @@ void 	parse_env(char **env, t_minish *minish)
 
 void	add_shell_lvl(t_minish *minish)
 {
-	t_env_node 	*env_node;
+	t_env_node	*env_node;
 	int			i;
 
 	env_node = minish->env_list->head;
 	while (env_node)
 	{
 		if (ft_strcmp(env_node->name, "SHLVL") == 0)
-			break;
+			break ;
 		env_node = env_node->next;
 	}
 	if (env_node)

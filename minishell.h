@@ -120,6 +120,7 @@ int						is_it_command(char *command);
 void					routeur(t_minish *minish);
 void  					expansions_controller(t_input_node *input_node, t_minish *minish);
 void 	 				print_error_env_inexistant(char *word);
+void					print_is_dir(char *dir);
 void 					manage_money(t_env_list *env_list, char **words);
 int						modify_word(char **word, t_env_list *env_list, off_t i);
 void					free_double_tab(char **tab);

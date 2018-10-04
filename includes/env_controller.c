@@ -61,36 +61,39 @@ int 	manage_opts(char **words, int *i)
 	return (opt);
 }
 
-void	env_recursive(t_input_node *input_node, t_minish *minish, int i, t_env_list *tmp_env_list)
+void	env_recursive(t_input_node *input_node, t_minish *minish, int i, t_env_list **tmp_env_list)
 {
 	char		**words;
 	int 		opt;
 
 	words = input_node->words;
-	if (do_we_print(input_node->words, i, tmp_env_list) == 1)
+	if (do_we_print(input_node->words, i, *tmp_env_list) == 1)
 		return ;
 	i++;
 	while (words[i] && ft_strcmp(words[i], "env") != 0)
 	{
 		if ((opt = manage_opts(words, &i)) == -1)
 		{
-			free_env_list(tmp_env_list);
+			free_env_list(*tmp_env_list);
 			return ;
 		}
 		if (opt == 1)
 		{
-			free_env_list(tmp_env_list);
-			tmp_env_list = new_env_list();
+			free_env_list(*tmp_env_list);
+			*tmp_env_list = new_env_list();
 		}
-		if (route_to_command(tmp_env_list, words, &i) == 1)
+		if (route_to_command(*tmp_env_list, words, &i) == 1)
 			return ;
 		if (words[i])
 			i++;
 	}
 	if (words[i])
 		env_recursive(input_node, minish, i, tmp_env_list);
-	if (tmp_env_list)
-		free_env_list(tmp_env_list);
+	if (*tmp_env_list)
+	{
+		free_env_list(*tmp_env_list);
+		*tmp_env_list = NULL;
+	}
 }
 
 void	env_controller(t_input_node *input_node, t_minish *minish, int i)
@@ -98,7 +101,7 @@ void	env_controller(t_input_node *input_node, t_minish *minish, int i)
 	t_env_list	*tmp_env_list;
 	
 	tmp_env_list = dup_env_list(minish->env_list->head);
-	env_recursive(input_node, minish, i, tmp_env_list);
+	env_recursive(input_node, minish, i, &tmp_env_list);
 	if (tmp_env_list)
 		free_env_list(tmp_env_list);
 }

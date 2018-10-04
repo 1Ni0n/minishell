@@ -6,7 +6,7 @@
 /*   By: aguillot <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/24 19:51:49 by aguillot          #+#    #+#             */
-/*   Updated: 2018/09/24 19:51:50 by aguillot         ###   ########.fr       */
+/*   Updated: 2018/10/04 17:02:24 by aguillot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	does_env_exists(char *env_name, t_env_list *env_list)
 
 int	set_existing_env(char **command, t_minish *minish)
 {
-	t_env_node 	*env_node;
+	t_env_node	*env_node;
 	char		*env_content;
 
 	env_node = minish->env_list->head;
@@ -38,11 +38,11 @@ int	set_existing_env(char **command, t_minish *minish)
 	while (env_node)
 	{
 		if (ft_strcmp(env_node->name, command[1]) == 0)
-			break;
+			break ;
 		env_node = env_node->next;
 	}
 	if (env_node->content)
-			free(env_node->content);
+		ft_strdel(&(env_node->content));
 	if (command[2] == NULL)
 		env_node->content = NULL;
 	else
@@ -53,7 +53,7 @@ int	set_existing_env(char **command, t_minish *minish)
 	return (1);
 }
 
-int set_new_env(char **command, t_minish *minish)
+int	set_new_env(char **command, t_minish *minish)
 {
 	char **tab;
 

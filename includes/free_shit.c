@@ -6,7 +6,7 @@
 /*   By: aguillot <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/01 20:48:06 by aguillot          #+#    #+#             */
-/*   Updated: 2018/10/01 20:48:08 by aguillot         ###   ########.fr       */
+/*   Updated: 2018/10/04 17:34:31 by aguillot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,14 @@ void	free_double_tab(char **tab)
 	{
 		while (tab[i])
 		{
-			free(tab[i]);
+			ft_strdel(&tab[i]);
 			i++;
 		}
 		free(tab);
 	}
 }
 
-void		free_all_and_exit(t_minish *minish, char **line, char **commands)
+void	free_all_and_exit(t_minish *minish, char **line, char **commands)
 {
 	int	i;
 
