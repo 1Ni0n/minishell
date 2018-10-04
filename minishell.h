@@ -99,7 +99,7 @@ void					cd_controller(t_input_node *input_node, t_minish *minish);
 void					print_env_usage(char c);
 t_env_list 				*dup_env_list(t_env_node *head);
 void					print_env(t_env_list *env_list);
-int 					route_to_command(t_env_list *tmp_env_list, char **words, int *i);
+int 					route_to_command(t_env_list **tmp_env_list, char **words, int *i);
 char					**get_input_n_tab(char **words, int i);
 void					free_tabs(char **tab);
 t_env_node				*env_exists(t_env_list *env_list, char *tab);
@@ -128,4 +128,9 @@ void					delete_env_node(t_env_node *env_node, t_env_node *previous, t_env_list 
 void					print_error_var_inexistant(char *var);
 int						find_noalnum(char *tmp);
 void					free_c(t_char_struct *c);
+int						execute_command_middle(char **word, char **paths, t_env_list *tmp_env_list, off_t i);
+void 					fourchette_bis(char *path, t_env_list *tmp_env_list, char **words, int i);
+int						is_it_command(char *command);
+int						route_to_command_middle(t_env_list *tmp_env_list, char **words, int *i);
+int 					execute_command(t_env_list *tmp_env_list, char **words, int i);
 #endif

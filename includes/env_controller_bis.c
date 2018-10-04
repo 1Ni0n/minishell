@@ -6,22 +6,22 @@
 /*   By: aguillot <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/26 13:40:52 by aguillot          #+#    #+#             */
-/*   Updated: 2018/09/26 13:40:54 by aguillot         ###   ########.fr       */
+/*   Updated: 2018/10/04 20:46:25 by aguillot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	set_tmp_variable(t_env_list *tmp_env_list, char *tmp_var)
+void	set_tmp_variable(t_env_list tmp_env_list, char *tmp_var)
 {
-	char 		**tab;
+	char		**tab;
 	t_env_node	*env_node;
 
 	env_node = NULL;
 	if (!(tab = ft_strsplit(tmp_var, '=')))
 	{
 		ft_putstr("Malloc failed. Out of Memory. Exiting program...\n");
-		exit (1);
+		exit(1);
 	}
 	if (!tab[0])
 	{
@@ -34,13 +34,12 @@ void	set_tmp_variable(t_env_list *tmp_env_list, char *tmp_var)
 		append_to_env_list(tmp_env_list, tab);
 }
 
-void 	fourchette_bis(char *path, t_env_list *tmp_env_list, char **words, int i)
+void	fourchette_bis(char *path, t_env_list *tmp_env_list, char **words,\
+		int i)
 {
-	char 	**env_tab;
-	char 	**av_tab;
+	char	**env_tab;
 	pid_t	pid;
 
-	av_tab = get_input_n_tab(words, i);
 	env_tab = NULL;
 	if (path == NULL && access(words[i], F_OK) == -1)
 	{
@@ -50,26 +49,19 @@ void 	fourchette_bis(char *path, t_env_list *tmp_env_list, char **words, int i)
 	if (tmp_env_list)
 		env_tab = get_env_tab(tmp_env_list);
 	if ((pid = fork()) == 0)
-	{
-		execve(path, av_tab, env_tab);
-		free_double_tab(env_tab);
-		free_double_tab(av_tab);
-	}
+		execve(path, &words[i], env_tab);
 	else if (pid < 0)
-	{
 		ft_putstr("Error: Fork failed to create a new process.\n");
-		free_double_tab(env_tab);
-		free_double_tab(av_tab);
-	}
+	free_double_tab(env_tab);
 	wait(&pid);
 }
 
-int 	execute_command(t_env_list *tmp_env_list, char **words, int i)
+int		execute_command(t_env_list *tmp_env_list, char **words, int i)
 {
-	char 	**paths;
-	char 	**paths_p_command;
-	int 	b;
-	int a;
+	char	**paths;
+	char	**paths_p_command;
+	int		b;
+	int		a;
 
 	b = 0;
 	a = 0;
@@ -83,19 +75,22 @@ int 	execute_command(t_env_list *tmp_env_list, char **words, int i)
 	else
 	{
 		paths_p_command = add_command_to_paths(words[i], paths);
+		free_double_tab(paths);
 		if (paths_p_command)
 		{
 			while (paths_p_command[b])
 			{
 				if (access(paths_p_command[b], X_OK) == 0 || access(paths_p_command[b], R_OK) == 0)
-					break;
+					break ;
 				b++;
 			}
 			if (paths_p_command[b])
 			{
 				fourchette_bis(paths_p_command[b], tmp_env_list, words, i);
+				free_double_tab(paths_p_command);
 				return (1);
 			}
+			free_double_tab(paths_p_command);
 		}
 		print_error_path(words[i]);
 		return (0);
@@ -103,7 +98,7 @@ int 	execute_command(t_env_list *tmp_env_list, char **words, int i)
 	return (0);
 }
 
-int 	route_to_command(t_env_list *tmp_env_list, char **words, int *i)
+int		route_to_command(t_env_list **tmp_env_list, char **words, int *i)
 {
 	int j;
 	int set;
@@ -117,10 +112,10 @@ int 	route_to_command(t_env_list *tmp_env_list, char **words, int *i)
 			if (words[*i][j] == '=')
 			{
 				set = 1;
-				set_tmp_variable(tmp_env_list, words[*i]);
+				set_tmp_variable(*tmp_env_list, words[*i]);
 				if (!words[*i + 1])
 				{
-					print_env(tmp_env_list);
+					print_env(*tmp_env_list);
 					return (1);
 				}
 			}
@@ -133,7 +128,7 @@ int 	route_to_command(t_env_list *tmp_env_list, char **words, int *i)
 				print_error_path(words[*i]);
 				return (1);
 			}
-			if (execute_command(tmp_env_list, words, *i) == 1)
+			if (execute_command(*tmp_env_list, words, *i) == 1)
 				return (1);
 		}
 	}

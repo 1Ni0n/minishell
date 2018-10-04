@@ -6,7 +6,7 @@
 /*   By: aguillot <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/18 17:44:19 by aguillot          #+#    #+#             */
-/*   Updated: 2018/09/18 17:44:20 by aguillot         ###   ########.fr       */
+/*   Updated: 2018/10/04 20:53:24 by aguillot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@ int		is_it_command(char *command)
 	return (-1);
 }
 
-void 	fourchette(t_minish *minish, char *paths_p_command, char **av_tab)
+void	fourchette(t_minish *minish, char *paths_p_command, char **av_tab)
 {
-	char 		**env_tab;
+	char		**env_tab;
 	pid_t		pid;
 	struct stat	sb;
 
@@ -43,10 +43,9 @@ void 	fourchette(t_minish *minish, char *paths_p_command, char **av_tab)
 	wait(&pid);
 }
 
-
 void	commands_controller(t_input_node *input_node, t_minish *minish)
 {
-	off_t 			i;
+	off_t			i;
 	char			**paths;
 	char			**paths_p_command;
 

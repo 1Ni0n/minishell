@@ -6,26 +6,26 @@
 /*   By: aguillot <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/06 15:49:14 by aguillot          #+#    #+#             */
-/*   Updated: 2018/09/06 15:49:16 by aguillot         ###   ########.fr       */
+/*   Updated: 2018/10/04 20:50:28 by aguillot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void		print_error_path(char *command)
+void	print_error_path(char *command)
 {
 	ft_putstr("minishell: ");
 	ft_putstr(command);
 	ft_putstr(": command not found\n");
 }
 
-void		free_lists_and_carry_on(t_minish *minish)
+void	free_lists_and_carry_on(t_minish *minish)
 {
 	free_env_list(minish->env_list);
 	free_input_list(minish->input_list);
 }
 
-void		env_malloc_error(t_env_list *env_list)
+void	env_malloc_error(t_env_list *env_list)
 {
 	free_env_list(env_list);
 	ft_putstr("Malloc failed. Out of Memory. Exiting program...\n");

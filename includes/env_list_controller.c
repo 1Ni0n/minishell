@@ -6,7 +6,7 @@
 /*   By: aguillot <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/06 14:26:58 by aguillot          #+#    #+#             */
-/*   Updated: 2018/09/06 14:27:02 by aguillot         ###   ########.fr       */
+/*   Updated: 2018/10/04 20:50:50 by aguillot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ void		append_to_env_list(t_env_list *env_list, char **tab)
 
 t_env_list	*new_env_list(void)
 {
-	t_env_list 	*env_list;
+	t_env_list	*env_list;
 
 	env_list = NULL;
 	if ((env_list = (t_env_list*)malloc(sizeof(*env_list))) == NULL)
@@ -71,9 +71,9 @@ t_env_list	*new_env_list(void)
 	return (env_list);
 }
 
-t_env_list 	*dup_env_list(t_env_node *head)
+t_env_list	*dup_env_list(t_env_node *head)
 {
-	t_env_list 	*tmp_env_list;
+	t_env_list	*tmp_env_list;
 	t_env_node	*env_node;
 
 	tmp_env_list = new_env_list();

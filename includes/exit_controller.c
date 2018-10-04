@@ -6,7 +6,7 @@
 /*   By: aguillot <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/27 15:25:04 by aguillot          #+#    #+#             */
-/*   Updated: 2018/09/27 15:25:05 by aguillot         ###   ########.fr       */
+/*   Updated: 2018/10/04 19:35:46 by aguillot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,5 +23,5 @@ void	exit_controller(t_input_node *input_node, t_minish *minish)
 	if (tmp)
 		exit(ft_atoi(tmp));
 	else
-		exit (1);
+		exit(1);
 }

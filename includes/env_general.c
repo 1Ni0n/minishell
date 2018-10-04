@@ -6,7 +6,7 @@
 /*   By: aguillot <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/25 15:38:53 by aguillot          #+#    #+#             */
-/*   Updated: 2018/09/25 15:38:55 by aguillot         ###   ########.fr       */
+/*   Updated: 2018/10/04 20:50:05 by aguillot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ t_env_node	*env_exists(t_env_list *env_list, char *tab)
 	return (NULL);
 }
 
-void	replace_env(t_env_node *env_node, char *tab)
+void		replace_env(t_env_node *env_node, char *tab)
 {
 	ft_strdel(&env_node->content);
 	if (tab)
@@ -44,7 +44,7 @@ void	replace_env(t_env_node *env_node, char *tab)
 		env_node->content = NULL;
 }
 
-void	print_env(t_env_list *env_list)
+void		print_env(t_env_list *env_list)
 {
 	t_env_node *env_node;
 
@@ -59,9 +59,9 @@ void	print_env(t_env_list *env_list)
 	}
 }
 
-char	**get_env_tab(t_env_list *env_list)
+char		**get_env_tab(t_env_list *env_list)
 {
-	t_env_node 	*env_node;
+	t_env_node	*env_node;
 	char		**env_tab;
 	off_t		len;
 

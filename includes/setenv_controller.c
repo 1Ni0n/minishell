@@ -6,7 +6,7 @@
 /*   By: aguillot <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/24 16:44:21 by aguillot          #+#    #+#             */
-/*   Updated: 2018/10/04 17:00:44 by aguillot         ###   ########.fr       */
+/*   Updated: 2018/10/04 19:03:07 by aguillot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,21 @@ void	free_command(char **command)
 	free(command);
 }
 
+int		str_deleted(char *str)
+{
+	if (str)
+		return (1);
+	ft_putstr("setenv: Variable name must begin with a letter.\n");
+	return (-1);
+}
+
 int		check_if_alphanum(char *str)
 {
 	off_t	i;
 
 	i = 0;
+	if (str_deleted(str) == -1)
+		return (-1);
 	if (!((str[0] >= 65 && str[0] <= 90) || (str[0] >= 97 && str[0] <=\
 		122)))
 	{
@@ -70,7 +80,6 @@ int		setenv_controller(t_input_node *input_node, t_minish *minish)
 	char	**command;
 
 	command = input_node->words;
-	printf("%s\n", command[1]);
 	if (input_node->word_count >= 4)
 	{
 		ft_putstr("setenv: Too many arguments.\n");

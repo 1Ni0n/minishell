@@ -1,4 +1,4 @@
-Ne pas oublier de print le permission denied si access trouve mais ne marche pas.
+pas oublier de print le permission denied si access trouve mais ne marche pas.
 Un truc pas tout a fait propre cest dans le env_controller quand tu new_env_list ca va pas tout free si malloc foire ca exit direct.
 il reste les errors de droits dans builtin a gerer.
-dans expansions controller si $ENV existe pas faut penser a dupliquer le tableau
+lorsque env -i PATH=/bin ls on a des leaks

@@ -6,14 +6,14 @@
 /*   By: aguillot <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/02 13:52:36 by aguillot          #+#    #+#             */
-/*   Updated: 2018/10/02 13:52:38 by aguillot         ###   ########.fr       */
+/*   Updated: 2018/10/04 20:51:27 by aguillot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-
-void	delete_env_node(t_env_node *env_node, t_env_node *previous, t_env_list *env_list)
+void	delete_env_node(t_env_node *env_node, t_env_node *previous,\
+		t_env_list *env_list)
 {
 	t_env_node *next;
 

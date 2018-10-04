@@ -6,7 +6,7 @@
 /*   By: aguillot <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/01 15:11:46 by aguillot          #+#    #+#             */
-/*   Updated: 2018/10/01 15:11:47 by aguillot         ###   ########.fr       */
+/*   Updated: 2018/10/04 19:22:54 by aguillot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int		look_for_expansion(char **words)
 {
-	off_t 	i;
+	off_t	i;
 
 	i = 0;
 	while (words[i])
@@ -28,7 +28,7 @@ int		look_for_expansion(char **words)
 
 void	replace_tilde(char *home, char **word)
 {
-	char *ptr;
+	char	*ptr;
 
 	ptr = ft_strdup((*word) + 1);
 	free(*word);
@@ -40,7 +40,7 @@ void	replace_tilde(char *home, char **word)
 void	manage_tildes(t_env_list *env_list, char **words)
 {
 	off_t	i;
-	char 	*home;
+	char	*home;
 
 	i = 0;
 	home = NULL;
@@ -55,7 +55,7 @@ void	manage_tildes(t_env_list *env_list, char **words)
 	}
 }
 
-void 	expansions_controller(t_input_node *input_node, t_minish *minish)
+void	expansions_controller(t_input_node *input_node, t_minish *minish)
 {
 	if (look_for_expansion(input_node->words) == -1)
 		return ;

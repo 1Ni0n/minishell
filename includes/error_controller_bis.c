@@ -6,7 +6,7 @@
 /*   By: aguillot <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/26 11:28:42 by aguillot          #+#    #+#             */
-/*   Updated: 2018/09/26 11:28:56 by aguillot         ###   ########.fr       */
+/*   Updated: 2018/10/04 20:48:04 by aguillot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,21 +20,21 @@ void	print_env_usage(char c)
 	ft_putstr("[name=value ...] [utility [argument ...]]\n");
 }
 
-void		print_error_path_inexistant(char *path)
+void	print_error_path_inexistant(char *path)
 {
 	ft_putstr("cd: ");
 	ft_putstr(path);
 	ft_putstr(" :No such file or directory\n");
 }
 
-void 	print_error_rights(char *path)
+void	print_error_rights(char *path)
 {
 	ft_putstr("cd: ");
 	ft_putstr(path);
 	ft_putstr(" :access denied\n");
 }
 
-void 	print_error_dir(char *path)
+void	print_error_dir(char *path)
 {
 	ft_putstr("cd: ");
 	ft_putstr(path);
