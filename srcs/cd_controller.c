@@ -6,16 +6,22 @@
 /*   By: aguillot <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/25 14:59:00 by aguillot          #+#    #+#             */
-/*   Updated: 2018/09/27 17:19:48 by aguillot         ###   ########.fr       */
+/*   Updated: 2018/10/05 13:17:12 by aguillot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
+void	append_and_free(t_env_list *env_list, char **tab)
+{
+	append_to_env_list(env_list, tab);
+	free_double_tab(tab);
+}
+
 void	set_all_pwd(char *pwd, char *oldpwd, t_env_list *env_list)
 {
-	t_env_node 	*env_node;
-	char 		**tab;
+	t_env_node	*env_node;
+	char		**tab;
 
 	if ((env_node = env_exists(env_list, "PWD")) != NULL)
 		replace_env(env_node, pwd);
@@ -26,8 +32,7 @@ void	set_all_pwd(char *pwd, char *oldpwd, t_env_list *env_list)
 		tab[0] = ft_strdup("PWD");
 		tab[1] = ft_strdup(pwd);
 		tab[2] = NULL;
-		append_to_env_list(env_list, tab);
-		free_double_tab(tab);
+		append_and_free(env_list, tab);
 	}
 	if ((env_node = env_exists(env_list, "OLDPWD")) != NULL)
 		replace_env(env_node, oldpwd);
@@ -38,12 +43,11 @@ void	set_all_pwd(char *pwd, char *oldpwd, t_env_list *env_list)
 		tab[0] = ft_strdup("OLDPWD");
 		tab[1] = ft_strdup(oldpwd);
 		tab[2] = NULL;
-		append_to_env_list(env_list, tab);
-		free_double_tab(tab);
+		append_and_free(env_list, tab);
 	}
 }
 
-int 	check_path_stats(char *path)
+int		check_path_stats(char *path)
 {
 	struct stat sb;
 	DIR			*dir_struct;
@@ -54,7 +58,7 @@ int 	check_path_stats(char *path)
 		print_error_path_inexistant(path);
 		return (-1);
 	}
-	if (S_ISDIR(sb.st_mode) != 1 && S_ISLNK(sb.st_mode) !=1)
+	if (S_ISDIR(sb.st_mode) != 1 && S_ISLNK(sb.st_mode) != 1)
 	{
 		print_error_dir(path);
 		return (-1);
@@ -70,10 +74,10 @@ int 	check_path_stats(char *path)
 
 void	changedir_home(t_env_list *env_list)
 {
-	char 		*pwd;
-	char 		*oldpwd;
-	char 		*path;
-	int 		error;
+	char		*pwd;
+	char		*oldpwd;
+	char		*path;
+	int			error;
 
 	pwd = NULL;
 	oldpwd = NULL;
@@ -96,8 +100,8 @@ void	changedir_home(t_env_list *env_list)
 
 void	cd_controller(t_input_node *input_node, t_minish *minish)
 {
-	char 	**words;
-	int 	i;
+	char	**words;
+	int		i;
 
 	words = input_node->words;
 	i = 0;

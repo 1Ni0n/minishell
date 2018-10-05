@@ -6,7 +6,7 @@
 /*   By: aguillot <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/14 11:46:42 by aguillot          #+#    #+#             */
-/*   Updated: 2018/10/02 18:38:50 by aguillot         ###   ########.fr       */
+/*   Updated: 2018/10/05 16:00:27 by aguillot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <sys/types.h>
 # include <sys/stat.h>
 # include <stdlib.h>
+
 void	*ft_memset(void *str, int c, size_t n);
 void	ft_bzero(void *s, size_t n);
 void	*ft_memcpy(void *str1, const void *str2, size_t n);
@@ -82,4 +83,7 @@ char	**ft_splitwhitespaces(char *str);
 char	**ft_tabdup(char **tab);
 char	*ft_strlinktochar(char **str, char c);
 int		ft_strichr(const char *str, int c);
+int		ft_strlenuntilc(const char *str, char c);
+char	*ft_strndup(const char *src, int n);
+char	*ft_strjoinfree(char *s1, char const *s2);
 #endif

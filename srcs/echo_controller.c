@@ -6,7 +6,7 @@
 /*   By: aguillot <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/24 14:01:16 by aguillot          #+#    #+#             */
-/*   Updated: 2018/09/24 14:01:18 by aguillot         ###   ########.fr       */
+/*   Updated: 2018/10/05 13:07:56 by aguillot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	daaamn(off_t i, char **words)
 
 void	echo_controller(char **words)
 {
-	off_t 	i;
+	off_t	i;
 
 	i = 1;
 	if (words[1])

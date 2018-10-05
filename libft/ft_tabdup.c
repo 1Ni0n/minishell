@@ -6,7 +6,7 @@
 /*   By: aguillot <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/20 15:40:55 by aguillot          #+#    #+#             */
-/*   Updated: 2018/09/20 15:41:14 by aguillot         ###   ########.fr       */
+/*   Updated: 2018/10/05 16:00:03 by aguillot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ off_t	get_input_len(char **tab)
 
 char	**ft_tabdup(char **tab)
 {
-	char 	**new_tab;
-	off_t 	len;
+	char	**new_tab;
+	off_t	len;
 
 	if (!tab)
 		return (NULL);

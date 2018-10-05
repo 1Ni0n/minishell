@@ -6,7 +6,7 @@
 /*   By: aguillot <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/25 12:07:06 by aguillot          #+#    #+#             */
-/*   Updated: 2018/10/04 20:55:34 by aguillot         ###   ########.fr       */
+/*   Updated: 2018/10/05 13:08:51 by aguillot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,28 +62,35 @@ int		manage_opts(char **words, int *i)
 	return (opt);
 }
 
+void	env_recursive_end(int opt, char **words, t_env_list **tmp_env_list,\
+	int i)
+{
+	if ((opt = manage_opts(words, &i)) == -1)
+	{
+		free_env_list(*tmp_env_list);
+		return ;
+	}
+	if (opt == 1)
+	{
+		free_env_list(*tmp_env_list);
+		*tmp_env_list = new_env_list();
+	}
+}
+
 void	env_recursive(t_input_node *input_node, t_minish *minish, int i,\
 		t_env_list **tmp_env_list)
 {
 	char	**words;
 	int		opt;
 
+	opt = 0;
 	words = input_node->words;
 	if (do_we_print(input_node->words, i, *tmp_env_list) == 1)
 		return ;
 	i++;
 	while (words[i] && ft_strcmp(words[i], "env") != 0)
 	{
-		if ((opt = manage_opts(words, &i)) == -1)
-		{
-			free_env_list(*tmp_env_list);
-			return ;
-		}
-		if (opt == 1)
-		{
-			free_env_list(*tmp_env_list);
-			*tmp_env_list = new_env_list();
-		}
+		env_recursive_end(opt, words, tmp_env_list, i);
 		if (route_to_command(tmp_env_list, words, &i) == 1)
 			return ;
 		if (words[i])

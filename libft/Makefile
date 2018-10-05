@@ -6,7 +6,7 @@
 #    By: aguillot <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/15 18:57:13 by aguillot          #+#    #+#              #
-#    Updated: 2018/10/02 18:38:12 by aguillot         ###   ########.fr        #
+#    Updated: 2018/10/05 15:03:30 by aguillot         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,7 @@ SRC  = ./ft_isalpha.c ft_memccpy.c ft_memmove.c ft_putendl_fd.c ft_strcat.c \
 	   ft_itoa.c ft_strsplit.c ft_strnchr.c ft_strnnchr.c ft_power.c \
 	   ft_strflen.c ft_nblen.c ft_putoff_t.c ft_strlink.c ft_off_t_len.c \
 	   ft_count_char.c ft_splitwhitespaces.c ft_tabdup.c ft_strlinktochar.c\
-	   ft_strichr.c
+	   ft_strichr.c ft_strndup.c ft_strjoinfree.c ft_strlenuntilc.c
 
 OBJ = ./ft_isalpha.o ft_memccpy.o ft_memmove.o ft_putendl_fd.o ft_strcat.o \
 	   ft_strdel.o ft_strjoin.o ft_strncat.o ft_strnstr.o ft_tolower.o \
@@ -42,7 +42,7 @@ OBJ = ./ft_isalpha.o ft_memccpy.o ft_memmove.o ft_putendl_fd.o ft_strcat.o \
 	   ft_itoa.o ft_strsplit.o ft_strnchr.o ft_strnnchr.o ft_power.o \
 	   ft_strflen.o ft_nblen.o ft_putoff_t.o ft_strlink.o ft_off_t_len.o \
 	   ft_count_char.o ft_splitwhitespaces.o ft_tabdup.o ft_strlinktochar.o\
-	   ft_strichr.o
+	   ft_strichr.o ft_strndup.o ft_strjoinfree.o ft_strlenuntilc.o
 
 all: $(NAME)
 

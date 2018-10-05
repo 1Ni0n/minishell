@@ -71,6 +71,17 @@ t_env_list	*new_env_list(void)
 	return (env_list);
 }
 
+void		dup_end(t_env_list *tmp_env_list, t_env_node *env_node)
+{
+	if (tmp_env_list->tail == NULL)
+		tmp_env_list->tail = env_node;
+	else
+	{
+		tmp_env_list->tail->next = env_node;
+		tmp_env_list->tail = env_node;
+	}
+}
+
 t_env_list	*dup_env_list(t_env_node *head)
 {
 	t_env_list	*tmp_env_list;
@@ -88,13 +99,7 @@ t_env_list	*dup_env_list(t_env_node *head)
 		env_node->next = NULL;
 		if (tmp_env_list->head == NULL)
 			tmp_env_list->head = env_node;
-		if (tmp_env_list->tail == NULL)
-			tmp_env_list->tail = env_node;
-		else
-		{
-			tmp_env_list->tail->next = env_node;
-			tmp_env_list->tail = env_node;
-		}
+		dup_end(tmp_env_list, env_node);
 		tmp_env_list->length++;
 		head = head->next;
 	}

@@ -6,32 +6,37 @@
 /*   By: aguillot <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/04 19:36:48 by aguillot          #+#    #+#             */
-/*   Updated: 2018/10/04 19:36:50 by aguillot         ###   ########.fr       */
+/*   Updated: 2018/10/05 13:17:55 by aguillot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int	execute_command_middle(char **words, char **paths, t_env_list *tmp_env_list, off_t i)
+int	execute_command_middle(char **words, char **paths,\
+		t_env_list *tmp_env_list, off_t i)
 {
-	char 	**paths_p_command;
+	char	**paths_p_command;
 	off_t	b;
 
 	b = 0;
 	paths_p_command = add_command_to_paths(words[i], paths);
+	free_double_tab(paths);
 	if (paths_p_command)
 	{
 		while (paths_p_command[b])
 		{
-			if (access(paths_p_command[b], X_OK) == 0 || access(paths_p_command[b], R_OK) == 0)
-				break;
+			if (access(paths_p_command[b], X_OK) == 0 ||\
+				access(paths_p_command[b], R_OK) == 0)
+				break ;
 			b++;
 		}
 		if (paths_p_command[b])
 		{
 			fourchette_bis(paths_p_command[b], tmp_env_list, words, i);
+			free_double_tab(paths_p_command);
 			return (1);
 		}
+		free_double_tab(paths_p_command);
 	}
 	print_error_path(words[i]);
 	return (0);

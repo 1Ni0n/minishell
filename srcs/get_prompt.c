@@ -61,7 +61,7 @@ void	get_prompt(char **line, t_minish *minish)
 
 	tmp = *line;
 	*line = ft_strtrim(*line);
-	free(tmp);
+	ft_strdel(&tmp);
 	if ((clean_line = handle_quotes(*line)) == NULL)
 		free_all_and_exit(minish, line, NULL);
 	if ((input_list = new_input_list()) == NULL)
@@ -71,5 +71,5 @@ void	get_prompt(char **line, t_minish *minish)
 	}
 	split_commands(input_list, &clean_line, minish);
 	free(clean_line);
-	free(*line);
+	ft_strdel(line);
 }

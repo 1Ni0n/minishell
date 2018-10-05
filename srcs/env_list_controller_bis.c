@@ -12,6 +12,20 @@
 
 #include "../minishell.h"
 
+void	delete_end(t_env_list *env_list, t_env_node *env_node, t_env_node\
+	*previous)
+{
+	if (env_list->head == env_node)
+		env_list->head = env_node->next;
+	if (env_list->tail == env_node)
+	{
+		if (previous)
+			env_list->tail = previous;
+		else
+			env_list->tail = NULL;
+	}
+}
+
 void	delete_env_node(t_env_node *env_node, t_env_node *previous,\
 		t_env_list *env_list)
 {
@@ -29,15 +43,7 @@ void	delete_env_node(t_env_node *env_node, t_env_node *previous,\
 		if (previous)
 			previous->next = next;
 	}
-	if (env_list->head == env_node)
-		env_list->head = env_node->next;
-	if (env_list->tail == env_node)
-	{
-		if (previous)
-			env_list->tail = previous;
-		else
-			env_list->tail = NULL;
-	}
+	delete_end(env_list, env_node, previous);
 	free(env_node->name);
 	if (env_node->content)
 		free(env_node->content);

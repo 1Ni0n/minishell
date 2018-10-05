@@ -6,7 +6,7 @@
 /*   By: aguillot <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/06 12:40:16 by aguillot          #+#    #+#             */
-/*   Updated: 2018/10/04 17:20:58 by aguillot         ###   ########.fr       */
+/*   Updated: 2018/10/05 14:28:33 by aguillot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,26 +47,16 @@ void	start_loop(t_minish *minish)
 			free_input_list(minish->input_list);
 		}
 		else if (ret == 0)
+		{
+			ft_strdel(&line);
 			write(1, "\n", 1);
+		}
 		else
+		{
+			ft_strdel(&line);
 			exit(1);
+		}
 	}
-}
-
-void	refresh_minish(t_minish *minish, char **paths)
-{
-	off_t	i;
-
-	i = 0;
-	if (paths)
-	{
-		while (paths[i])
-			free(paths[i++]);
-	}
-	free(paths);
-	free_input_list(minish->input_list);
-	free_env_list(minish->env_list);
-	start_loop(minish);
 }
 
 void	init_minishell(char **av, char **env)

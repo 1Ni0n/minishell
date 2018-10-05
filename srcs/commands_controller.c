@@ -43,6 +43,22 @@ void	fourchette(t_minish *minish, char *paths_p_command, char **av_tab)
 	wait(&pid);
 }
 
+void	commands_controller_middle(char **paths_p_command, off_t i,\
+	t_minish *minish, t_input_node *input_node)
+{
+	while (paths_p_command[i])
+	{
+		if (access(paths_p_command[i], X_OK) == 0 ||\
+			access(paths_p_command[i], R_OK) == 0)
+			break ;
+		i++;
+	}
+	if (paths_p_command[i])
+		fourchette(minish, paths_p_command[i], input_node->words);
+	else
+		print_error_path(input_node->words[0]);
+}
+
 void	commands_controller(t_input_node *input_node, t_minish *minish)
 {
 	off_t			i;
@@ -52,26 +68,18 @@ void	commands_controller(t_input_node *input_node, t_minish *minish)
 	i = 0;
 	if (input_node->words[0])
 	{
-		if (access(input_node->words[0], X_OK) == 0 || access(input_node->words[0], R_OK) == 0)
+		if (access(input_node->words[0], X_OK) == 0 ||\
+			access(input_node->words[0], R_OK) == 0)
 			fourchette(minish, input_node->words[0], input_node->words);
 		else
 		{
 			paths = get_paths(minish->env_list);
-			if ((paths_p_command = add_command_to_paths(input_node->words[0], paths)) == NULL)
+			if ((paths_p_command =\
+				add_command_to_paths(input_node->words[0], paths)) == NULL)
 				print_error_path(input_node->words[0]);
 			else
-			{
-				while(paths_p_command[i])
-				{
-					if (access(paths_p_command[i], X_OK) == 0 || access(paths_p_command[i], R_OK) == 0)
-						break;
-					i++;
-				}
-				if (paths_p_command[i])
-					fourchette(minish, paths_p_command[i], input_node->words);
-				else
-					print_error_path(input_node->words[0]);
-			}
+				commands_controller_middle(paths_p_command, i, minish,\
+					input_node);
 			free_double_tab(paths_p_command);
 			free_double_tab(paths);
 		}

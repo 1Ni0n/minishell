@@ -12,12 +12,14 @@
 
 #include "../minishell.h"
 
-void	set_tmp_variable(t_env_list tmp_env_list, char *tmp_var)
+void	set_tmp_variable(t_env_list *tmp_env_list, char *tmp_var)
 {
 	char		**tab;
 	t_env_node	*env_node;
 
 	env_node = NULL;
+	if (check_if_alphanum(tmp_var) == -1)
+		return ;
 	if (!(tab = ft_strsplit(tmp_var, '=')))
 	{
 		ft_putstr("Malloc failed. Out of Memory. Exiting program...\n");
@@ -32,6 +34,7 @@ void	set_tmp_variable(t_env_list tmp_env_list, char *tmp_var)
 		replace_env(env_node, tab[1]);
 	else
 		append_to_env_list(tmp_env_list, tab);
+	free_double_tab(tab);
 }
 
 void	fourchette_bis(char *path, t_env_list *tmp_env_list, char **words,\
@@ -73,28 +76,7 @@ int		execute_command(t_env_list *tmp_env_list, char **words, int i)
 		return (1);
 	}
 	else
-	{
-		paths_p_command = add_command_to_paths(words[i], paths);
-		free_double_tab(paths);
-		if (paths_p_command)
-		{
-			while (paths_p_command[b])
-			{
-				if (access(paths_p_command[b], X_OK) == 0 || access(paths_p_command[b], R_OK) == 0)
-					break ;
-				b++;
-			}
-			if (paths_p_command[b])
-			{
-				fourchette_bis(paths_p_command[b], tmp_env_list, words, i);
-				free_double_tab(paths_p_command);
-				return (1);
-			}
-			free_double_tab(paths_p_command);
-		}
-		print_error_path(words[i]);
-		return (0);
-	}
+		execute_command_middle(words, paths, tmp_env_list, i);
 	return (0);
 }
 
@@ -122,15 +104,7 @@ int		route_to_command(t_env_list **tmp_env_list, char **words, int *i)
 			j++;
 		}
 		if (set == 0)
-		{
-			if (is_it_command(words[*i]) == 1)
-			{
-				print_error_path(words[*i]);
-				return (1);
-			}
-			if (execute_command(*tmp_env_list, words, *i) == 1)
-				return (1);
-		}
+			route_to_command_middle(*tmp_env_list, words, i);
 	}
 	return (0);
 }

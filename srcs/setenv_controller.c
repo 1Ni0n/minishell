@@ -43,7 +43,7 @@ int		check_if_alphanum(char *str)
 		ft_putstr("setenv: Variable name must begin with a letter.\n");
 		return (-1);
 	}
-	while (str[i])
+	while (str[i] && str[i] != '=')
 	{
 		if (!((str[i] >= 42 && str[i] <= 57) || (str[i] >= 65 &&\
 			str[i] <= 90) || (str[i] >= 97 && str[i] <= 122)))

@@ -6,11 +6,12 @@
 /*   By: aguillot <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/24 19:06:47 by aguillot          #+#    #+#             */
-/*   Updated: 2018/04/26 12:17:30 by aguillot         ###   ########.fr       */
+/*   Updated: 2018/10/05 14:44:04 by aguillot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../get_next_line.h"
+#include <stdio.h>
 
 char	*ft_strlink(char **over, char *buff)
 {
@@ -48,7 +49,7 @@ int		fill_line(char **over, char **line)
 			*line = ft_strsub(*over, 0, i);
 			tmp = *over;
 			*over = ft_strsub(*over, i + 1, ft_strlen(*over) - i);
-			free(tmp);
+			ft_strdel(&tmp);
 			return (1);
 		}
 	}

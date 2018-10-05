@@ -6,13 +6,14 @@
 /*   By: aguillot <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/24 13:28:51 by aguillot          #+#    #+#             */
-/*   Updated: 2018/09/24 13:28:52 by aguillot         ###   ########.fr       */
+/*   Updated: 2018/10/05 13:32:46 by aguillot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int check_wich_command_end(char *command, t_input_node *input_node, t_minish *minish)
+int	check_wich_command_end(char *command, t_input_node *input_node,\
+	t_minish *minish)
 {
 	if (ft_strcmp(command, "unsetenv") == 0)
 	{
@@ -27,7 +28,7 @@ int check_wich_command_end(char *command, t_input_node *input_node, t_minish *mi
 	return (-1);
 }
 
-int check_wich_command(t_input_node *input_node, t_minish *minish)
+int	check_wich_command(t_input_node *input_node, t_minish *minish)
 {
 	char *command;
 
@@ -54,7 +55,6 @@ int check_wich_command(t_input_node *input_node, t_minish *minish)
 		return (1);
 	}
 	return (check_wich_command_end(command, input_node, minish));
-	//NE PAS OUBLIER DE CHECK LES VALEURS DE RETOUR DES FONCTIONS QUI MALLOC QQCHOSE PUIS FREE AND EXIT SI CA PASSE PAS
 }
 
 int	builtin_controller(t_input_node *input_node, t_minish *minish)
