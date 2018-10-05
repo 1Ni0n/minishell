@@ -63,9 +63,9 @@ int		manage_opts(char **words, int *i)
 }
 
 void	env_recursive_end(int opt, char **words, t_env_list **tmp_env_list,\
-	int i)
+	int *i)
 {
-	if ((opt = manage_opts(words, &i)) == -1)
+	if ((opt = manage_opts(words, i)) == -1)
 	{
 		free_env_list(*tmp_env_list);
 		return ;
@@ -90,7 +90,7 @@ void	env_recursive(t_input_node *input_node, t_minish *minish, int i,\
 	i++;
 	while (words[i] && ft_strcmp(words[i], "env") != 0)
 	{
-		env_recursive_end(opt, words, tmp_env_list, i);
+		env_recursive_end(opt, words, tmp_env_list, &i);
 		if (route_to_command(tmp_env_list, words, &i) == 1)
 			return ;
 		if (words[i])
