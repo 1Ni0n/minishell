@@ -1,3 +1,0 @@
-Lorsque env $existe_pas=mille ca delete le $existe_pas=mille donc ca affiche les envs
-Lorsque cd et un endroit du cd na pas les perms ca renvoie pas la bonne erreur.
-il faut interpreter les expansions avant chaque commande.
