@@ -1,5 +1,3 @@
-pas oublier de print le permission denied si access trouve mais ne marche pas.
-Un truc pas tout a fait propre cest dans le env_controller quand tu new_env_list ca va pas tout free si malloc foire ca exit direct.
-il reste les errors de droits dans builtin a gerer.
-lorsque env -i PATH=/bin ls on a des leaks
 Lorsque env $existe_pas=mille ca delete le $existe_pas=mille donc ca affiche les envs
+Lorsque cd et un endroit du cd na pas les perms ca renvoie pas la bonne erreur.
+il faut interpreter les expansions avant chaque commande.

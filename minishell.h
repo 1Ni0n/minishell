@@ -6,7 +6,7 @@
 /*   By: aguillot <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/05 16:43:42 by aguillot          #+#    #+#             */
-/*   Updated: 2018/10/05 13:48:09 by aguillot         ###   ########.fr       */
+/*   Updated: 2018/10/05 16:08:43 by aguillot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,7 @@ void					cd_controller(t_input_node *input_node,\
 void					print_env_usage(char c);
 t_env_list				*dup_env_list(t_env_node *head);
 void					print_env(t_env_list *env_list);
-int					route_to_command(t_env_list **tmp_env_list,\
+int						route_to_command(t_env_list **tmp_env_list,\
 		char **words, int *i);
 char					**get_input_n_tab(char **words, int i);
 void					free_tabs(char **tab);
